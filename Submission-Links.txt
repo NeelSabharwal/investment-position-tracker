@@ -1,0 +1,11 @@
+Investment Position Tracker — Neel Sabharwal
+
+GitHub repository:
+https://github.com/NeelSabharwal/investment-position-tracker.git
+
+Discord server invite:
+https://discord.gg/8H5rwnd4b
+
+The repository README contains the project documentation and Google Sheets links.
+The private repository and spreadsheets require separately granted access.
+Joining Discord does not automatically authorize protected bot commands.
