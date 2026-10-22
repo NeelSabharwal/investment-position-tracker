@@ -27,7 +27,7 @@ Personal add/sell changes are recorded in Sheets. The relevant nodes are **Build
 
 The complete header contract is in [google-sheets.json](../schemas/google-sheets.json). Creator headers begin at row 1; the personal/news header snapshots begin at row 2. Do not insert/remove/reorder columns without updating all validators and readers.
 
-This migration did not access or change Google account data. The configured account remains `substacksabharwal@gmail.com` (“Neel n8n project”), and must be explicitly verified again during credential recreation. Links and header definitions above come from existing project artifacts; this is not a new data audit or backup.
+The configured account is `substacksabharwal@gmail.com` (“Neel n8n project”), and must be explicitly verified again during credential recreation. Links and header definitions describe the existing project databases.
 
 ## Creator identity and provenance
 
@@ -40,7 +40,7 @@ Identity is `dataset_id + source_id + portfolio_id + ticker`. Preserve exact tic
 
 Baseline records are separate from transactions. The reviewed September reference is September 24, 2026, with exact compilation time unknown. Endorsement dates are not execution timestamps. CASH is an allocation observation, not a stock. Recovery reconstructs positions from committed baseline records plus subsequent accepted events; it must never synthesize OPEN trades to repair gaps.
 
-Baseline payloads, manifest members, original hashes, fictional and real rows remain in the private data stores. They were not transformed or re-hashed for GitHub. No database rows were imported, deleted or rewritten by this repository migration.
+Baseline payloads, manifest members, original hashes, fictional and real rows belong in the private data stores. Historical IDs and hashes must remain immutable.
 
 ## Limitations of Sheets
 

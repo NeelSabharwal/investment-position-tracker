@@ -1,8 +1,8 @@
 # Known gaps and next decisions
 
-## This repository migration does not change project behavior
+## Current state
 
-The live n8n Cloud workflows and Google Sheets were not edited. Docker is prepared but not deployed. No credentials, billing, Gemini provider, Discord endpoint or automation schedule changed.
+The project runs on n8n Cloud with Google Sheets. Self-hosting is deferred.
 
 The latest drafts differ from the published graphs, particularly D, E, F, G and H. Some notes exist only in the drafts. Preserving both avoids replacing tested production behavior with an unverified draft. The exact node counts and version IDs are in the export manifest.
 
@@ -18,7 +18,6 @@ The latest drafts differ from the published graphs, particularly D, E, F, G and 
 - Ticker validation checks syntax and evidence, not existence on an exchange. Adding a security-master lookup would need an authoritative source, currency/exchange policy and bounded failure behavior.
 - D disables stored successful/error execution data for production privacy; not every slash command will have a saved payload to present.
 - Actual container startup, Google OAuth callback behavior, runner compatibility and Discord HTTPS access still require a local integration test.
-- Genuine commit history begins with this repository migration. Do not fabricate earlier dates or claim two days of commits from a single session.
 
 ## Future application database: PostgreSQL
 
@@ -28,5 +27,5 @@ Proposed relations: `users`, `discord_identities`, `portfolios`, `sources`, `sou
 
 Use transactional unique constraints on message/post/event identities and locked job claims. Even then, a database transaction cannot atomically commit an external Discord request; keep the outbox/receipt reconciliation design for uncertain external results.
 
-The earlier multiple-user sign-in idea belongs after this data and authorization foundation. Authenticate through a maintained identity provider or established password-hashing/session library; map a verified Discord identity to an internal user, and enforce per-user row access on every read/write. Never trust a submitted Discord ID by itself. Do not store plaintext passwords or a large portfolio JSON blob as the only audit history. This extension and its UI have not been implemented or deployed by the GitHub migration.
+The earlier multiple-user sign-in idea belongs after this data and authorization foundation. Authenticate through a maintained identity provider or established password-hashing/session library; map a verified Discord identity to an internal user, and enforce per-user row access on every read/write. Never trust a submitted Discord ID by itself. Do not store plaintext passwords or a large portfolio JSON blob as the only audit history. The account system and its UI are not implemented.
 

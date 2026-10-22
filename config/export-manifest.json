@@ -117,7 +117,7 @@
       "cloud_active_at_capture": true,
       "nodes": 57,
       "original_version_payload_sha256": "c21cb47108f78da3d48419193dba451f527215105a30f0e26e82d453ef43beda",
-      "repository_export_sha256": "9feb7b199bd4dcb73fa61f9ace9f4a04b204bac5b1539a83ebf68cd608bf1f3f",
+      "repository_export_sha256": "baa002589044946266b96424d6f4036e829ee870024ed4b97706bba82bf62882",
       "settings_provenance": "Current workflow settings at capture; version endpoint does not return historical settings"
     },
     {
@@ -130,7 +130,7 @@
       "cloud_active_at_capture": true,
       "nodes": 60,
       "original_version_payload_sha256": "7b0c1101014a8d873e6074f8780a49bce7c1a883bb97b090a072c0d9c4b3f492",
-      "repository_export_sha256": "987fda7994364269d10b49f1cc448add9e3fc62a6c733dd35b9e733d22a3ae0b",
+      "repository_export_sha256": "a43577c19beaece5537bc45265d811df0996efb3d012ddb6338f609aad515cae",
       "settings_provenance": "Current workflow settings at capture; version endpoint does not return historical settings"
     },
     {
@@ -522,6 +522,18 @@
       "variant": "published",
       "node": "Prepare confirmed OMDA only",
       "reason": "Completed one-off real newsletter reconciliation input omitted; disabled no-op retained for graph integrity."
+    },
+    {
+      "workflow": "E",
+      "variant": "draft",
+      "node": "Select recovery or record failure",
+      "reason": "Completed private baseline-import payload excluded. Explicit import mode fails closed; ordinary recovery planner and persisted historical records are unchanged."
+    },
+    {
+      "workflow": "E",
+      "variant": "published",
+      "node": "Select recovery or record failure",
+      "reason": "Completed private baseline-import payload excluded. Explicit import mode fails closed; ordinary recovery planner and persisted historical records are unchanged."
     }
   ]
 }

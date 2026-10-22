@@ -1,6 +1,8 @@
 # Architecture and workflow reference
 
-Captured 22 October 2026. Names and node lists are indexed in [node-inventory.json](node-inventory.json); source versions are recorded in [the manifest](../config/export-manifest.json). The ten workflows are preserved, not rebuilt for this repository.
+Captured 22 October 2026. Names and node lists are indexed in [node-inventory.json](node-inventory.json); source versions are recorded in [the manifest](../config/export-manifest.json). The ten workflows form the existing project architecture.
+
+For a specific node, use the [searchable node reference](node-reference.html) or its [Markdown version](node-reference.md). It contains 326 descriptions from the cleaned draft set, with exact node names and workflow links.
 
 ## Overall system
 

@@ -1,6 +1,6 @@
 # Testing and evidence
 
-## New checks run for this migration
+## Offline regression checks
 
 The repository tests run offline against exported node code and fictional state. No workflow execution was started in n8n, and no Gemini/Gmail/Sheets/Discord call was made by these tests.
 
@@ -40,7 +40,7 @@ The structural check verifies all 19 exports, inactive state, expected hashes, u
 
 ## Historical Cloud evidence
 
-[selected-cloud-executions.json](../evidence/selected-cloud-executions.json) preserves the existing demonstration links, descriptions and saved tag metadata. These execution links are historical evidence, not executions performed during this GitHub migration. Cloud retention may eventually remove them. They are not substitutes for local integration tests.
+[selected-cloud-executions.json](../evidence/selected-cloud-executions.json) preserves the existing demonstration links, descriptions and saved tag metadata. These execution links are historical evidence from n8n Cloud. Cloud retention may eventually remove them. They are not substitutes for local integration tests.
 
 Notable distinctions: B's saved deterministic run does not call Gemini; C's saved regression does not write real Sheets; A's replay demonstrates a duplicate stop; H's idle poll sends nothing; J injects a simulated 503. F's stored real brief execution is the relevant historical AI-service evidence. Read each entry's `why` field before presenting it.
 
