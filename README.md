@@ -13,6 +13,18 @@ Individual Level 3 n8n project by Neel Sabharwal. The system tracks newsletter a
 - [Current status](docs/project-status.md)
 - [Known limitations and future database design](docs/known-gaps.md)
 
+## Project spreadsheets
+
+| Database | Link | Contents |
+| --- | --- | --- |
+| Creator positions | [Dick Capital database](https://docs.google.com/spreadsheets/d/1re2wClNHgrLDp8uSXF4Leb_TqPLV4jTW7OGxR2sKjqM/edit) | Sources, Trade History, Current Positions and Processing Log; creator portfolio state and audit records. |
+| Personal portfolio | [Personal portfolio database](https://docs.google.com/spreadsheets/d/13eDJnuSS2Fq_1QSC3tEo8kYpUsyonyaB3ifrmjmibdc/edit) | Personal transactions and derived holdings used by the personal portfolio commands. Contains private financial information. |
+| News and briefs | [News database](https://docs.google.com/spreadsheets/d/1-yhFwFQEUMf8f_6_6qkvtdSgoEbaDgg90B0L4dQ1dmA/edit) | Newsletter news and brief records. |
+
+These are external Google Sheets links, not copies of database contents. Downloading this repository as a ZIP does not include the spreadsheet data. The project owner accesses them through **substacksabharwal@gmail.com**; evaluators need separately granted Google Viewer access. Repository access does not grant spreadsheet access. Sharing permissions have not been changed.
+
+See [database and command documentation](docs/database-and-commands.md) and [tab schemas](schemas/google-sheets.json) for the data structure.
+
 ## Workflows and versions
 
 `workflows/draft/` contains the ten saved A–J graphs. The cleaned draft set has 392 nodes, including 326 documented nodes and 66 retained helper, fixture or sticky-note nodes omitted from the short reference. `workflows/published/` contains the nine published A–I graphs. J is an unpublished manual demonstration.
