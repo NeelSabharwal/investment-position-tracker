@@ -1,0 +1,15 @@
+{
+  "yaml_parses": true,
+  "services": [
+    "postgres",
+    "n8n",
+    "task-runners"
+  ],
+  "versions_match": true,
+  "loopback_editor_only": true,
+  "postgres_not_exposed": true,
+  "runner_crypto_allowlist": true,
+  "docker_compose_config_executed": false,
+  "containers_started": false,
+  "limitation": "Static parse and assertions only; Docker engine unavailable in this remote workspace."
+}

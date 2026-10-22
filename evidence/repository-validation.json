@@ -1,0 +1,6 @@
+{
+  "export_files": 19,
+  "structural_and_secret_pattern_checks": "PASS",
+  "errors": [],
+  "limitations": "Pattern scan does not guarantee detection of every secret. Export payloads were also reviewed before commit."
+}

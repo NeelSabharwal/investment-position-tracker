@@ -1,0 +1,102 @@
+{
+  "passed": 24,
+  "failed": 0,
+  "tests": [
+    {
+      "name": "New job is isolated from real datasets",
+      "passed": true
+    },
+    {
+      "name": "Temporary failure persists retry without sending",
+      "passed": true
+    },
+    {
+      "name": "Second attempt sends same frozen payload",
+      "passed": true
+    },
+    {
+      "name": "Successful Discord response commits receipt",
+      "passed": true
+    },
+    {
+      "name": "Completed duplicate is a no-op",
+      "passed": true
+    },
+    {
+      "name": "Three failed attempts end in review",
+      "passed": true
+    },
+    {
+      "name": "Timeout is uncertain and never immediately resent",
+      "passed": true
+    },
+    {
+      "name": "Reconciliation succeeds without a nonce in GET response",
+      "passed": true
+    },
+    {
+      "name": "No matching history requires review",
+      "passed": true
+    },
+    {
+      "name": "Two matching messages require review",
+      "passed": true
+    },
+    {
+      "name": "Unrelated user cannot spoof marker",
+      "passed": true
+    },
+    {
+      "name": "Different content cannot spoof marker",
+      "passed": true
+    },
+    {
+      "name": "429 remains retryable and honours delay",
+      "passed": true
+    },
+    {
+      "name": "403 is permanent review",
+      "passed": true
+    },
+    {
+      "name": "Long text becomes an intact attachment",
+      "passed": true
+    },
+    {
+      "name": "Unapproved channel is rejected",
+      "passed": true
+    },
+    {
+      "name": "No eligible news completes without a message",
+      "passed": true
+    },
+    {
+      "name": "Saved brief freezes delivery without AI dependence",
+      "passed": true
+    },
+    {
+      "name": "Invalid evidence is review, not a technical retry",
+      "passed": true
+    },
+    {
+      "name": "Read-back detects conflicting checkpoint",
+      "passed": true
+    },
+    {
+      "name": "Duplicate queue records are rejected",
+      "passed": true
+    },
+    {
+      "name": "Scan ignores fictional demonstration jobs",
+      "passed": true
+    },
+    {
+      "name": "Release is conditional on exact owner",
+      "passed": true
+    },
+    {
+      "name": "Interrupted receipt preserves IN_FLIGHT checkpoint",
+      "passed": true
+    }
+  ]
+}

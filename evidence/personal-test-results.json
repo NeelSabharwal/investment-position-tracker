@@ -1,0 +1,92 @@
+{
+  "suite": "Personal transaction production code",
+  "passed": 21,
+  "total": 21,
+  "checks": [
+    {
+      "name": "weighted average BUY",
+      "pass": true
+    },
+    {
+      "name": "partial SELL realizes average cost profit",
+      "pass": true
+    },
+    {
+      "name": "loss displays negative amount",
+      "pass": true
+    },
+    {
+      "name": "full SELL closes position",
+      "pass": true
+    },
+    {
+      "name": "oversell returns private error and no write",
+      "pass": true
+    },
+    {
+      "name": "negative shares blocked",
+      "pass": true
+    },
+    {
+      "name": "nonfinite price blocked",
+      "pass": true
+    },
+    {
+      "name": "currency conflict blocked",
+      "pass": true
+    },
+    {
+      "name": "unowned lock blocks update",
+      "pass": true
+    },
+    {
+      "name": "exact interaction replay adds nothing",
+      "pass": true
+    },
+    {
+      "name": "interaction payload conflict blocked",
+      "pass": true
+    },
+    {
+      "name": "readback confirms exact atomic changes",
+      "pass": true
+    },
+    {
+      "name": "uncertain write retains review path",
+      "pass": true
+    },
+    {
+      "name": "owner lock cannot be acquired by another user",
+      "pass": true
+    },
+    {
+      "name": "writer identity uses dedicated personal metadata",
+      "pass": true
+    },
+    {
+      "name": "different writer ownership rejected",
+      "pass": true
+    },
+    {
+      "name": "personal replies include import freshness",
+      "pass": true
+    },
+    {
+      "name": "archived AIR.PA cannot be bought or sold",
+      "pass": true
+    },
+    {
+      "name": "archived RHM.DE cannot be bought or sold",
+      "pass": true
+    },
+    {
+      "name": "archived SAAB-B.ST cannot be bought or sold",
+      "pass": true
+    },
+    {
+      "name": "new personal position defaults to USD without currency option",
+      "pass": true
+    }
+  ],
+  "real_writes": 0
+}

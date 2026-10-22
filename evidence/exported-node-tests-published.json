@@ -1,0 +1,3593 @@
+{
+  "kind": "Offline fictional regression; no n8n execution or external requests",
+  "variant": "published",
+  "ran_at": "2026-10-22T18:11:45.654Z",
+  "records": [
+    {
+      "workflow": "A",
+      "node": "Run Phase 3 checks",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "status": "PASS",
+            "passed": 59,
+            "checks": [
+              "P301 accepted end-to-end",
+              "P302 accepted end-to-end",
+              "P303 accepted end-to-end",
+              "P304 accepted end-to-end",
+              "CLOSE calculated state",
+              "second source independent",
+              "reopen accepted",
+              "reopen new cycle",
+              "duplicate returns without writes",
+              "intake and manager records distinct",
+              "notification preview always suppressed",
+              "frozen analyzer reusable",
+              "no trade completes",
+              "uncertain requires review",
+              "missing ticker requires review",
+              "inconsistent state requires review",
+              "reviews add no trade events",
+              "real content excluded",
+              "notification opt-in rejected",
+              "unknown fixture rejected",
+              "plain MIME normalized",
+              "CRLF and NBSP normalized",
+              "HTML cannot bypass gate",
+              "sender mismatch durably blocked",
+              "source privacy config blocks",
+              "429 transient",
+              "503 transient",
+              "network timeout transient",
+              "403 permanent",
+              "404 permanent",
+              "unknown error conservative",
+              "transient queued",
+              "retry-after respected",
+              "E no early retry",
+              "E selects due request",
+              "retry succeeds",
+              "durable retry count",
+              "three attempts then blocked",
+              "no fourth attempt",
+              "blocked omitted from recovery",
+              "authentication failure blocked",
+              "partial history persisted",
+              "recovery uses saved analysis",
+              "partial commit recovered",
+              "recovered exactly two event IDs",
+              "recovery avoided model recall",
+              "both projections reconstructed",
+              "completed recovered replay no writes",
+              "in-flight attempt protected",
+              "stale intake selected",
+              "stale intake recovery completes",
+              "frozen-analysis crash recovers",
+              "no second model call after saved analysis",
+              "checkpoint tampering fails closed",
+              "write readback mismatch detected",
+              "duplicate intake rows rejected",
+              "error logging contains identifiers only",
+              "duplicate error idempotent",
+              "unrelated error rejected"
+            ],
+            "mode": "DETERMINISTIC_FICTIONAL",
+            "external_calls": 0,
+            "notifications_sent": 0
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "B",
+      "node": "Run 50 fictional checks",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "suite": "Phase 2 shared engine",
+            "mode": "MOCK_AI_AND_IN_MEMORY_SHEETS",
+            "passed": 50,
+            "total": 50,
+            "results": [
+              {
+                "id": "T01",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T02",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T03",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T04",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "CLOSED",
+                "reason": ""
+              },
+              {
+                "id": "T05",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T06",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T07",
+                "pass": true,
+                "expected": "DUPLICATE",
+                "actual": "DUPLICATE",
+                "history_delta": 0,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T08",
+                "pass": true,
+                "expected": "NO_TRADE",
+                "actual": "NO_TRADE",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T09",
+                "pass": true,
+                "expected": "NO_TRADE",
+                "actual": "NO_TRADE",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T10",
+                "pass": true,
+                "expected": "NO_TRADE",
+                "actual": "NO_TRADE",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T11",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T12",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T13",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "STATE_TRANSITION:ADD:NONE"
+              },
+              {
+                "id": "T14",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "CLOSED",
+                "reason": "STATE_TRANSITION:REDUCE:CLOSED"
+              },
+              {
+                "id": "T15",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "CLOSED",
+                "reason": "STATE_TRANSITION:CLOSE:CLOSED"
+              },
+              {
+                "id": "T16",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "OPEN",
+                "reason": "STATE_TRANSITION:OPEN:OPEN"
+              },
+              {
+                "id": "T17",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "CLOSED",
+                "reason": ""
+              },
+              {
+                "id": "T18",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 2,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T19",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "STATE_TRANSITION:ADD:NONE"
+              },
+              {
+                "id": "T20",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T21",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T22",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T23",
+                "pass": true,
+                "expected": "NO_TRADE",
+                "actual": "NO_TRADE",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T24",
+                "pass": true,
+                "expected": "BLOCKED",
+                "actual": "BLOCKED",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "PRIVACY_OR_SOURCE_BLOCKED"
+              },
+              {
+                "id": "T25",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "POSSIBLE_CROSS_MESSAGE_DUPLICATE"
+              },
+              {
+                "id": "T26",
+                "pass": true,
+                "expected": "BLOCKED",
+                "actual": "BLOCKED",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "PRIVACY_OR_SOURCE_BLOCKED"
+              },
+              {
+                "id": "T27",
+                "pass": true,
+                "expected": "BLOCKED",
+                "actual": "BLOCKED",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "PRIVACY_OR_SOURCE_BLOCKED"
+              },
+              {
+                "id": "T28",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T29",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T30",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T31",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T32",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T33",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 2,
+                "state": "CLOSED",
+                "reason": ""
+              },
+              {
+                "id": "T34",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T35",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 2,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "F04",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 1,
+                "simulated": true
+              },
+              {
+                "id": "F05",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 1,
+                "simulated": true
+              },
+              {
+                "id": "F06",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 1,
+                "simulated": true
+              },
+              {
+                "id": "F07",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 1,
+                "simulated": true
+              },
+              {
+                "id": "F08",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 2,
+                "simulated": true
+              },
+              {
+                "id": "F11_CONFLICT",
+                "pass": true,
+                "actual": "REVIEW"
+              },
+              {
+                "id": "F10_IDENTICAL_DUPLICATE",
+                "pass": true,
+                "actual": "REVIEW"
+              },
+              {
+                "id": "INDEPENDENT_SOURCES",
+                "pass": true
+              },
+              {
+                "id": "CLOSE_REOPEN_CYCLE",
+                "pass": true
+              },
+              {
+                "id": "FALSE_FIXTURE_CLAIM_BLOCKED",
+                "pass": true
+              },
+              {
+                "id": "DURABLE_THREE_ATTEMPT_LIMIT",
+                "pass": true,
+                "actual": "BLOCKED"
+              },
+              {
+                "id": "FROZEN_ANALYSIS_CONFLICT",
+                "pass": true
+              },
+              {
+                "id": "OPTIONAL_FIELDS_NULL",
+                "pass": true,
+                "actual": "VALID_TRADE"
+              },
+              {
+                "id": "REQUIRED_FIELD_MISSING",
+                "pass": true,
+                "actual": "INVALID"
+              },
+              {
+                "id": "UNKNOWN_MISSING_FIELD",
+                "pass": true,
+                "actual": "INVALID"
+              }
+            ],
+            "live_gemini_tested": false,
+            "live_sheets_tested": false
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "B",
+      "node": "Verify real preview safeguards",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "suite": "Approved real-email preview safeguards",
+            "passed": 25,
+            "total": 25,
+            "results": [
+              {
+                "name": "Manual execution accepted",
+                "passed": true
+              },
+              {
+                "name": "Production execution blocked",
+                "passed": true
+              },
+              {
+                "name": "Subworkflow execution blocked",
+                "passed": true
+              },
+              {
+                "name": "Unknown message blocked",
+                "passed": true
+              },
+              {
+                "name": "Correct Google account verified",
+                "passed": true
+              },
+              {
+                "name": "Other Google account blocked",
+                "passed": true
+              },
+              {
+                "name": "Missing account blocked",
+                "passed": true
+              },
+              {
+                "name": "Exact content hash accepted",
+                "passed": true
+              },
+              {
+                "name": "Content substitution blocked",
+                "passed": true
+              },
+              {
+                "name": "Wrong message blocked",
+                "passed": true
+              },
+              {
+                "name": "Wrong sender blocked",
+                "passed": true
+              },
+              {
+                "name": "Wrong list blocked",
+                "passed": true
+              },
+              {
+                "name": "Missing authentication blocked",
+                "passed": true
+              },
+              {
+                "name": "DMARC failure blocked",
+                "passed": true
+              },
+              {
+                "name": "Changed receipt timestamp blocked",
+                "passed": true
+              },
+              {
+                "name": "Duplicate From header blocked",
+                "passed": true
+              },
+              {
+                "name": "Chat member content blocked",
+                "passed": true
+              },
+              {
+                "name": "Changed HTML structure blocked",
+                "passed": true
+              },
+              {
+                "name": "Multiple posts blocked",
+                "passed": true
+              },
+              {
+                "name": "Tracking links and footer excluded",
+                "passed": true
+              },
+              {
+                "name": "Real content never labeled fictional",
+                "passed": true
+              },
+              {
+                "name": "Valid preview cannot authorize manager",
+                "passed": true
+              },
+              {
+                "name": "Preview does not mutate shared result",
+                "passed": true
+              },
+              {
+                "name": "No-trade preview stays no-trade",
+                "passed": true
+              },
+              {
+                "name": "Technical failure cannot authorize writes",
+                "passed": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "C",
+      "node": "Run 50 fixture and recovery checks",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "suite": "Phase 2 shared engine + approved October reconciliation",
+            "mode": "MOCK_AI_AND_IN_MEMORY_SHEETS",
+            "passed": 54,
+            "total": 54,
+            "results": [
+              {
+                "id": "T01",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T02",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T03",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T04",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "CLOSED",
+                "reason": ""
+              },
+              {
+                "id": "T05",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T06",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T07",
+                "pass": true,
+                "expected": "DUPLICATE",
+                "actual": "DUPLICATE",
+                "history_delta": 0,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T08",
+                "pass": true,
+                "expected": "NO_TRADE",
+                "actual": "NO_TRADE",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T09",
+                "pass": true,
+                "expected": "NO_TRADE",
+                "actual": "NO_TRADE",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T10",
+                "pass": true,
+                "expected": "NO_TRADE",
+                "actual": "NO_TRADE",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T11",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T12",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T13",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "STATE_TRANSITION:ADD:NONE"
+              },
+              {
+                "id": "T14",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "CLOSED",
+                "reason": "STATE_TRANSITION:REDUCE:CLOSED"
+              },
+              {
+                "id": "T15",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "CLOSED",
+                "reason": "STATE_TRANSITION:CLOSE:CLOSED"
+              },
+              {
+                "id": "T16",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "OPEN",
+                "reason": "STATE_TRANSITION:OPEN:OPEN"
+              },
+              {
+                "id": "T17",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "CLOSED",
+                "reason": ""
+              },
+              {
+                "id": "T18",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 2,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T19",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "STATE_TRANSITION:ADD:NONE"
+              },
+              {
+                "id": "T20",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T21",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T22",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T23",
+                "pass": true,
+                "expected": "NO_TRADE",
+                "actual": "NO_TRADE",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T24",
+                "pass": true,
+                "expected": "BLOCKED",
+                "actual": "BLOCKED",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "PRIVACY_OR_SOURCE_BLOCKED"
+              },
+              {
+                "id": "T25",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "POSSIBLE_CROSS_MESSAGE_DUPLICATE"
+              },
+              {
+                "id": "T26",
+                "pass": true,
+                "expected": "BLOCKED",
+                "actual": "BLOCKED",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "PRIVACY_OR_SOURCE_BLOCKED"
+              },
+              {
+                "id": "T27",
+                "pass": true,
+                "expected": "BLOCKED",
+                "actual": "BLOCKED",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": "PRIVACY_OR_SOURCE_BLOCKED"
+              },
+              {
+                "id": "T28",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T29",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T30",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T31",
+                "pass": true,
+                "expected": "REVIEW",
+                "actual": "REVIEW",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T32",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 1,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "T33",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 2,
+                "state": "CLOSED",
+                "reason": ""
+              },
+              {
+                "id": "T34",
+                "pass": true,
+                "expected": "INVALID",
+                "actual": "INVALID",
+                "history_delta": 0,
+                "state": "NONE",
+                "reason": ""
+              },
+              {
+                "id": "T35",
+                "pass": true,
+                "expected": "ACCEPT",
+                "actual": "ACCEPT",
+                "history_delta": 2,
+                "state": "OPEN",
+                "reason": ""
+              },
+              {
+                "id": "F04",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 1,
+                "simulated": true
+              },
+              {
+                "id": "F05",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 1,
+                "simulated": true
+              },
+              {
+                "id": "F06",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 1,
+                "simulated": true
+              },
+              {
+                "id": "F07",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 1,
+                "simulated": true
+              },
+              {
+                "id": "F08",
+                "pass": true,
+                "recovered": "COMPLETE",
+                "replay": "DUPLICATE",
+                "history_rows": 2,
+                "simulated": true
+              },
+              {
+                "id": "F11_CONFLICT",
+                "pass": true,
+                "actual": "REVIEW"
+              },
+              {
+                "id": "F10_IDENTICAL_DUPLICATE",
+                "pass": true,
+                "actual": "REVIEW"
+              },
+              {
+                "id": "INDEPENDENT_SOURCES",
+                "pass": true
+              },
+              {
+                "id": "CLOSE_REOPEN_CYCLE",
+                "pass": true
+              },
+              {
+                "id": "FALSE_FIXTURE_CLAIM_BLOCKED",
+                "pass": true
+              },
+              {
+                "id": "DURABLE_THREE_ATTEMPT_LIMIT",
+                "pass": true,
+                "actual": "BLOCKED"
+              },
+              {
+                "id": "FROZEN_ANALYSIS_CONFLICT",
+                "pass": true
+              },
+              {
+                "id": "OPTIONAL_FIELDS_NULL",
+                "pass": true,
+                "actual": "VALID_TRADE"
+              },
+              {
+                "id": "REQUIRED_FIELD_MISSING",
+                "pass": true,
+                "actual": "INVALID"
+              },
+              {
+                "id": "UNKNOWN_MISSING_FIELD",
+                "pass": true,
+                "actual": "INVALID"
+              },
+              {
+                "id": "REAL_REVIEW_EXACT_GATE",
+                "pass": true
+              },
+              {
+                "id": "REAL_REVIEW_TAMPER_BLOCKED",
+                "pass": true
+              },
+              {
+                "id": "SILC_AUDITED_REOPEN_WITHOUT_INVENTED_CLOSE",
+                "pass": true
+              },
+              {
+                "id": "ONON_NORMAL_OPEN",
+                "pass": true
+              }
+            ],
+            "live_gemini_tested": false,
+            "live_sheets_tested": false
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "D",
+      "node": "Run signature and command checks",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "status": "PASSED",
+            "checks": 61,
+            "passed": 61,
+            "results": [
+              {
+                "name": "Valid Ed25519 signature authorizes command",
+                "passed": true
+              },
+              {
+                "name": "Initial acknowledgment is ephemeral deferred response",
+                "passed": true
+              },
+              {
+                "name": "No interaction token survives authorization",
+                "passed": true
+              },
+              {
+                "name": "Tampered body rejected",
+                "passed": true
+              },
+              {
+                "name": "Forged signature rejected",
+                "passed": true
+              },
+              {
+                "name": "Missing signature rejected",
+                "passed": true
+              },
+              {
+                "name": "Stale timestamp rejected",
+                "passed": true
+              },
+              {
+                "name": "Future timestamp rejected",
+                "passed": true
+              },
+              {
+                "name": "Wrong public key rejected",
+                "passed": true
+              },
+              {
+                "name": "Missing public key fails closed",
+                "passed": true
+              },
+              {
+                "name": "Parsed JSON cannot substitute for raw bytes",
+                "passed": true
+              },
+              {
+                "name": "Oversized body rejected",
+                "passed": true
+              },
+              {
+                "name": "PING returns PONG",
+                "passed": true
+              },
+              {
+                "name": "Numeric interaction ID rejected",
+                "passed": true
+              },
+              {
+                "name": "Wrong application rejected",
+                "passed": true
+              },
+              {
+                "name": "Unapproved guild rejected",
+                "passed": true
+              },
+              {
+                "name": "DM rejected",
+                "passed": true
+              },
+              {
+                "name": "Unapproved user rejected",
+                "passed": true
+              },
+              {
+                "name": "Authorized role can read",
+                "passed": true
+              },
+              {
+                "name": "Read role cannot analyze",
+                "passed": true
+              },
+              {
+                "name": "Bot user rejected",
+                "passed": true
+              },
+              {
+                "name": "Unsupported interaction type rejected",
+                "passed": true
+              },
+              {
+                "name": "Unknown command rejected",
+                "passed": true
+              },
+              {
+                "name": "History ticker required",
+                "passed": true
+              },
+              {
+                "name": "Ticker normalized",
+                "passed": true
+              },
+              {
+                "name": "Ticker mentions and injection rejected",
+                "passed": true
+              },
+              {
+                "name": "Unknown argument rejected",
+                "passed": true
+              },
+              {
+                "name": "Duplicate options rejected",
+                "passed": true
+              },
+              {
+                "name": "Wrong option type rejected",
+                "passed": true
+              },
+              {
+                "name": "Nested option rejected",
+                "passed": true
+              },
+              {
+                "name": "Negative page rejected",
+                "passed": true
+              },
+              {
+                "name": "Fractional page rejected",
+                "passed": true
+              },
+              {
+                "name": "Oversized page rejected",
+                "passed": true
+              },
+              {
+                "name": "Invalid source rejected",
+                "passed": true
+              },
+              {
+                "name": "Open positions from both sources",
+                "passed": true
+              },
+              {
+                "name": "Source filter isolates positions",
+                "passed": true
+              },
+              {
+                "name": "Ticker history includes both authors",
+                "passed": true
+              },
+              {
+                "name": "Source filter isolates history",
+                "passed": true
+              },
+              {
+                "name": "History includes closed and reopened events",
+                "passed": true
+              },
+              {
+                "name": "Received date fallback disclosed",
+                "passed": true
+              },
+              {
+                "name": "Empty history has helpful result",
+                "passed": true
+              },
+              {
+                "name": "Unknown source handled",
+                "passed": true
+              },
+              {
+                "name": "Out of range page handled",
+                "passed": true
+              },
+              {
+                "name": "Output bounded and mentions disabled",
+                "passed": true
+              },
+              {
+                "name": "Projection conflict rejected",
+                "passed": true
+              },
+              {
+                "name": "Duplicate history rejected",
+                "passed": true
+              },
+              {
+                "name": "Dependency outage returns safe response",
+                "passed": true
+              },
+              {
+                "name": "Missing sheet rejected",
+                "passed": true
+              },
+              {
+                "name": "Valid Sheets response accepted",
+                "passed": true
+              },
+              {
+                "name": "Latest unprocessed fictional notification selected",
+                "passed": true
+              },
+              {
+                "name": "Analysis request is BLOCKED with zero calls",
+                "passed": true
+              },
+              {
+                "name": "Prepared write targets Processing Log only",
+                "passed": true
+              },
+              {
+                "name": "Readback verifies durable request",
+                "passed": true
+              },
+              {
+                "name": "Same interaction creates no duplicate write",
+                "passed": true
+              },
+              {
+                "name": "New interaction for same notification creates no duplicate request",
+                "passed": true
+              },
+              {
+                "name": "Same ID different command conflicts",
+                "passed": true
+              },
+              {
+                "name": "Interrupted write does not pretend success",
+                "passed": true
+              },
+              {
+                "name": "Completed source has no new eligible message",
+                "passed": true
+              },
+              {
+                "name": "Reprocessing requires explicit review",
+                "passed": true
+              },
+              {
+                "name": "No accepted history mutated",
+                "passed": true
+              },
+              {
+                "name": "Recorded request has no signature or token",
+                "passed": true
+              }
+            ],
+            "external_calls": 0,
+            "notifications_sent": 0
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "D",
+      "node": "Test private read replies",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "status": "PASSED",
+            "passed": 68,
+            "checks": 68,
+            "results": [
+              {
+                "name": "Exact published configuration permits only fictional private reads",
+                "passed": true
+              },
+              {
+                "name": "Real application ID retained",
+                "passed": true
+              },
+              {
+                "name": "Real public key retained",
+                "passed": true
+              },
+              {
+                "name": "positions immediately defers privately",
+                "passed": true
+              },
+              {
+                "name": "history immediately defers privately",
+                "passed": true
+              },
+              {
+                "name": "PING remains PONG without member or token",
+                "passed": true
+              },
+              {
+                "name": "Missing signature is rejected",
+                "passed": true
+              },
+              {
+                "name": "Tampered original bytes rejected",
+                "passed": true
+              },
+              {
+                "name": "Reserialized JSON rejected",
+                "passed": true
+              },
+              {
+                "name": "Expired signature rejected",
+                "passed": true
+              },
+              {
+                "name": "Synthetic signatures cannot use real public key",
+                "passed": true
+              },
+              {
+                "name": "Wrong application rejected",
+                "passed": true
+              },
+              {
+                "name": "Wrong guild rejected",
+                "passed": true
+              },
+              {
+                "name": "Direct messages rejected",
+                "passed": true
+              },
+              {
+                "name": "Another administrator cannot bypass exact user rule",
+                "passed": true
+              },
+              {
+                "name": "Bot user rejected",
+                "passed": true
+              },
+              {
+                "name": "Mismatched command registration rejected",
+                "passed": true
+              },
+              {
+                "name": "Command registered in wrong guild rejected",
+                "passed": true
+              },
+              {
+                "name": "Missing interaction token rejected",
+                "passed": true
+              },
+              {
+                "name": "Query injection in token rejected",
+                "passed": true
+              },
+              {
+                "name": "Missing ticker rejected before defer",
+                "passed": true
+              },
+              {
+                "name": "Malformed page rejected before defer",
+                "passed": true
+              },
+              {
+                "name": "Unsafe source rejected",
+                "passed": true
+              },
+              {
+                "name": "Analyze cannot defer or queue work",
+                "passed": true
+              },
+              {
+                "name": "VERIFY_ONLY rollback blocks reads",
+                "passed": true
+              },
+              {
+                "name": "Policy fails closed for fictional_data_only",
+                "passed": true
+              },
+              {
+                "name": "Policy fails closed for suppress_responses",
+                "passed": true
+              },
+              {
+                "name": "Policy fails closed for notifications_enabled",
+                "passed": true
+              },
+              {
+                "name": "Policy fails closed for analyze_enabled",
+                "passed": true
+              },
+              {
+                "name": "Policy fails closed for reader_role_ids",
+                "passed": true
+              },
+              {
+                "name": "Manual executions cannot send",
+                "passed": true
+              },
+              {
+                "name": "Production executions can deliver approved reads",
+                "passed": true
+              },
+              {
+                "name": "Fixture token cannot send even in production mode",
+                "passed": true
+              },
+              {
+                "name": "Two minute delivery expiry enforced",
+                "passed": true
+              },
+              {
+                "name": "Public acknowledgement cannot pass delivery gate",
+                "passed": true
+              },
+              {
+                "name": "Positions uses validated fictional records",
+                "passed": true
+              },
+              {
+                "name": "Only original response can be edited",
+                "passed": true
+              },
+              {
+                "name": "Mentions disabled and only content delivered",
+                "passed": true
+              },
+              {
+                "name": "Response is within Discord content size",
+                "passed": true
+              },
+              {
+                "name": "History includes separate source histories",
+                "passed": true
+              },
+              {
+                "name": "Manual makeEdit cannot produce transport URL",
+                "passed": true
+              },
+              {
+                "name": "Dependency failure 503 produces safe reply",
+                "passed": true
+              },
+              {
+                "name": "Dependency failure network produces safe reply",
+                "passed": true
+              },
+              {
+                "name": "Dependency failure 401 produces safe reply",
+                "passed": true
+              },
+              {
+                "name": "Nonfictional history cannot escape",
+                "passed": true
+              },
+              {
+                "name": "Inconsistent state cannot escape",
+                "passed": true
+              },
+              {
+                "name": "Delivery requires matching content and ephemeral flag",
+                "passed": true
+              },
+              {
+                "name": "Public or unverified message result not claimed as delivered",
+                "passed": true
+              },
+              {
+                "name": "HTTP success without parseable result is unverified",
+                "passed": true
+              },
+              {
+                "name": "Permanent 401 is not retried",
+                "passed": true
+              },
+              {
+                "name": "Permanent 403 is not retried",
+                "passed": true
+              },
+              {
+                "name": "Permanent 404 is not retried",
+                "passed": true
+              },
+              {
+                "name": "Permanent 400 is not retried",
+                "passed": true
+              },
+              {
+                "name": "Transient 0 gets one retry",
+                "passed": true
+              },
+              {
+                "name": "Transient 0 stops after second attempt",
+                "passed": true
+              },
+              {
+                "name": "Transient 408 gets one retry",
+                "passed": true
+              },
+              {
+                "name": "Transient 408 stops after second attempt",
+                "passed": true
+              },
+              {
+                "name": "Transient 500 gets one retry",
+                "passed": true
+              },
+              {
+                "name": "Transient 500 stops after second attempt",
+                "passed": true
+              },
+              {
+                "name": "Transient 502 gets one retry",
+                "passed": true
+              },
+              {
+                "name": "Transient 502 stops after second attempt",
+                "passed": true
+              },
+              {
+                "name": "Transient 503 gets one retry",
+                "passed": true
+              },
+              {
+                "name": "Transient 503 stops after second attempt",
+                "passed": true
+              },
+              {
+                "name": "429 respects server retry delay",
+                "passed": true
+              },
+              {
+                "name": "Long rate limit does not cause early retry",
+                "passed": true
+              },
+              {
+                "name": "Missing rate limit timing fails closed",
+                "passed": true
+              },
+              {
+                "name": "n8n serialized response body normalized safely",
+                "passed": true
+              },
+              {
+                "name": "Final summary has no token URL or raw error",
+                "passed": true
+              }
+            ],
+            "external_calls": 0,
+            "discord_messages_sent": 0,
+            "signatures": "synthetic ephemeral keys",
+            "configuration_sha256": "29a323b436f11d5234f15c96220c1170c7a776743f3eb02db063b834f0a7cd08"
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "D",
+      "node": "Test analysis dispatch and ownership",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "status": "PASSED",
+            "checks": 44,
+            "passed": 44,
+            "results": [
+              {
+                "name": "Analyze receives a private defer under approved policy",
+                "passed": true
+              },
+              {
+                "name": "Analyze production reply guard passes",
+                "passed": true
+              },
+              {
+                "name": "Analyze manual reply delivery is blocked",
+                "passed": true
+              },
+              {
+                "name": "Notifications cannot be enabled by policy",
+                "passed": true
+              },
+              {
+                "name": "Analyze uses the same private original-response edit",
+                "passed": true
+              },
+              {
+                "name": "Unique metadata ID fixed across writers",
+                "passed": true
+              },
+              {
+                "name": "Each writer has a new owner nonce",
+                "passed": true
+              },
+              {
+                "name": "Lock visible across OAuth projects",
+                "passed": true
+              },
+              {
+                "name": "Owner-specific release matches ID key and value",
+                "passed": true
+              },
+              {
+                "name": "Matching owner verifies",
+                "passed": true
+              },
+              {
+                "name": "Different owner cannot pass guard",
+                "passed": true
+              },
+              {
+                "name": "Missing lock fails closed",
+                "passed": true
+              },
+              {
+                "name": "Unavailable lock fails closed",
+                "passed": true
+              },
+              {
+                "name": "Wrong metadata location fails closed",
+                "passed": true
+              },
+              {
+                "name": "No time-based takeover exists",
+                "passed": true
+              },
+              {
+                "name": "Malformed owner rejected",
+                "passed": true
+              },
+              {
+                "name": "Delete of zero owners is not a verified release",
+                "passed": true
+              },
+              {
+                "name": "Exact owner release is verified",
+                "passed": true
+              },
+              {
+                "name": "Newest eligible Dick fixture selected",
+                "passed": true
+              },
+              {
+                "name": "Command persisted before dispatch",
+                "passed": true
+              },
+              {
+                "name": "Command checkpoint contains no token or lock owner",
+                "passed": true
+              },
+              {
+                "name": "Notification remains suppressed",
+                "passed": true
+              },
+              {
+                "name": "Only Processing Log targeted by command write",
+                "passed": true
+              },
+              {
+                "name": "RAW write prevents formulas",
+                "passed": true
+              },
+              {
+                "name": "Exact command readback accepted",
+                "passed": true
+              },
+              {
+                "name": "Missing command readback rejected",
+                "passed": true
+              },
+              {
+                "name": "Changed command readback rejected",
+                "passed": true
+              },
+              {
+                "name": "Same interaction reuses frozen request and row",
+                "passed": true
+              },
+              {
+                "name": "Interaction ID conflict blocked",
+                "passed": true
+              },
+              {
+                "name": "Reprocess requires review and makes no write",
+                "passed": true
+              },
+              {
+                "name": "Other user cannot dispatch",
+                "passed": true
+              },
+              {
+                "name": "Unknown source rejected",
+                "passed": true
+              },
+              {
+                "name": "Second source selects independent fixture",
+                "passed": true
+              },
+              {
+                "name": "Technical failure preserves retry checkpoint",
+                "passed": true
+              },
+              {
+                "name": "Early retry does not dispatch",
+                "passed": true
+              },
+              {
+                "name": "Due retry reuses original command and request",
+                "passed": true
+              },
+              {
+                "name": "New interaction prioritizes durable recovery",
+                "passed": true
+              },
+              {
+                "name": "Uncertain child result retains lock by throwing",
+                "passed": true
+              },
+              {
+                "name": "Missing durable intake cannot be claimed successful",
+                "passed": true
+              },
+              {
+                "name": "Reviewed command is terminal and never silently retried",
+                "passed": true
+              },
+              {
+                "name": "P316 passes existing deterministic extraction gate",
+                "passed": true
+              },
+              {
+                "name": "P317 passes existing deterministic extraction gate",
+                "passed": true
+              },
+              {
+                "name": "Friendly result discloses fictional data",
+                "passed": true
+              },
+              {
+                "name": "Friendly error reveals no raw failure details",
+                "passed": true
+              }
+            ],
+            "external_calls": 0,
+            "discord_messages_sent": 0
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "E",
+      "node": "Run Phase 3 recovery checks",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "status": "PASS",
+            "passed": 59,
+            "checks": [
+              "P301 accepted end-to-end",
+              "P302 accepted end-to-end",
+              "P303 accepted end-to-end",
+              "P304 accepted end-to-end",
+              "CLOSE calculated state",
+              "second source independent",
+              "reopen accepted",
+              "reopen new cycle",
+              "duplicate returns without writes",
+              "intake and manager records distinct",
+              "notification preview always suppressed",
+              "frozen analyzer reusable",
+              "no trade completes",
+              "uncertain requires review",
+              "missing ticker requires review",
+              "inconsistent state requires review",
+              "reviews add no trade events",
+              "real content excluded",
+              "notification opt-in rejected",
+              "unknown fixture rejected",
+              "plain MIME normalized",
+              "CRLF and NBSP normalized",
+              "HTML cannot bypass gate",
+              "sender mismatch durably blocked",
+              "source privacy config blocks",
+              "429 transient",
+              "503 transient",
+              "network timeout transient",
+              "403 permanent",
+              "404 permanent",
+              "unknown error conservative",
+              "transient queued",
+              "retry-after respected",
+              "E no early retry",
+              "E selects due request",
+              "retry succeeds",
+              "durable retry count",
+              "three attempts then blocked",
+              "no fourth attempt",
+              "blocked omitted from recovery",
+              "authentication failure blocked",
+              "partial history persisted",
+              "recovery uses saved analysis",
+              "partial commit recovered",
+              "recovered exactly two event IDs",
+              "recovery avoided model recall",
+              "both projections reconstructed",
+              "completed recovered replay no writes",
+              "in-flight attempt protected",
+              "stale intake selected",
+              "stale intake recovery completes",
+              "frozen-analysis crash recovers",
+              "no second model call after saved analysis",
+              "checkpoint tampering fails closed",
+              "write readback mismatch detected",
+              "duplicate intake rows rejected",
+              "error logging contains identifiers only",
+              "duplicate error idempotent",
+              "unrelated error rejected"
+            ],
+            "mode": "DETERMINISTIC_FICTIONAL",
+            "external_calls": 0,
+            "notifications_sent": 0
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "E",
+      "node": "Run shared recovery checks",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "status": "PASSED",
+            "passed": 46,
+            "checks": 46,
+            "results": [
+              {
+                "name": "Fictional scan accepted",
+                "passed": true
+              },
+              {
+                "name": "Notification opt-in rejected",
+                "passed": true
+              },
+              {
+                "name": "Nonfictional input rejected",
+                "passed": true
+              },
+              {
+                "name": "Unknown mode rejected",
+                "passed": true
+              },
+              {
+                "name": "Production cannot seed",
+                "passed": true
+              },
+              {
+                "name": "D and E use same metadata ID",
+                "passed": true
+              },
+              {
+                "name": "E identity accepted",
+                "passed": true
+              },
+              {
+                "name": "E owns only exact E claim",
+                "passed": true
+              },
+              {
+                "name": "D legacy guard rejects E-owned claim",
+                "passed": true
+              },
+              {
+                "name": "E accepts existing D owner format",
+                "passed": true
+              },
+              {
+                "name": "Unknown writer rejected",
+                "passed": true
+              },
+              {
+                "name": "No lock expiry or takeover",
+                "passed": true
+              },
+              {
+                "name": "Wrong-owner release fails verification",
+                "passed": true
+              },
+              {
+                "name": "Raw error and tokens removed",
+                "passed": true
+              },
+              {
+                "name": "Sanitization is repeatable",
+                "passed": true
+              },
+              {
+                "name": "Unrelated workflow error rejected",
+                "passed": true
+              },
+              {
+                "name": "E cannot recursively log itself",
+                "passed": true
+              },
+              {
+                "name": "Trigger errors work without execution ID",
+                "passed": true
+              },
+              {
+                "name": "Trigger timestamp survives second normalization",
+                "passed": true
+              },
+              {
+                "name": "Error written to Processing Log only",
+                "passed": true
+              },
+              {
+                "name": "Error record readback verified",
+                "passed": true
+              },
+              {
+                "name": "Duplicate error produces no write",
+                "passed": true
+              },
+              {
+                "name": "Missing error readback rejected",
+                "passed": true
+              },
+              {
+                "name": "Seed uses saved mock analysis",
+                "passed": true
+              },
+              {
+                "name": "Seed has zero external call counters",
+                "passed": true
+              },
+              {
+                "name": "Seed cannot overwrite existing operation",
+                "passed": true
+              },
+              {
+                "name": "Due saved intake selected",
+                "passed": true
+              },
+              {
+                "name": "Saved analysis dispatches directly to C",
+                "passed": true
+              },
+              {
+                "name": "Interrupted operation has exactly one accepted event",
+                "passed": true
+              },
+              {
+                "name": "First transient failure waits 30 seconds",
+                "passed": true
+              },
+              {
+                "name": "Early E scan does not call A",
+                "passed": true
+              },
+              {
+                "name": "Due interrupted operation selected",
+                "passed": true
+              },
+              {
+                "name": "Recovered projection is verified",
+                "passed": true
+              },
+              {
+                "name": "Recovery does not call B",
+                "passed": true
+              },
+              {
+                "name": "Recovery does not duplicate accepted event",
+                "passed": true
+              },
+              {
+                "name": "Completed intake is not selected again",
+                "passed": true
+              },
+              {
+                "name": "Unknown child outcome retains lock by throwing",
+                "passed": true
+              },
+              {
+                "name": "Mismatched child outcome rejected",
+                "passed": true
+              },
+              {
+                "name": "Second failure waits 120 seconds",
+                "passed": true
+              },
+              {
+                "name": "Third failure becomes blocked review",
+                "passed": true
+              },
+              {
+                "name": "No fourth automatic attempt",
+                "passed": true
+              },
+              {
+                "name": "Invalid checkpoint creates separate review ticket",
+                "passed": true
+              },
+              {
+                "name": "Invalid checkpoint is never dispatched",
+                "passed": true
+              },
+              {
+                "name": "Completed intake reconciles pending D receipt",
+                "passed": true
+              },
+              {
+                "name": "Reconciled command creates no new recovery",
+                "passed": true
+              },
+              {
+                "name": "Sheets outage cannot dispatch or claim success",
+                "passed": true
+              }
+            ],
+            "external_calls": 0,
+            "notifications_sent": 0
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "E",
+      "node": "Run portfolio regression checks",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "status": "PASSED",
+            "passed": 178,
+            "total": 178,
+            "checks": [
+              {
+                "name": "MP001 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP002 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP003 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP004 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP005 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP006 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP007 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP008 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP009 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP010 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP011 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP012 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP013 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP014 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP015 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP016 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP017 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP018 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP019 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP020 expected classification",
+                "passed": true
+              },
+              {
+                "name": "MP021 expected classification",
+                "passed": true
+              },
+              {
+                "name": "Alias Trading Port",
+                "passed": true
+              },
+              {
+                "name": "Alias Trading Portfolio",
+                "passed": true
+              },
+              {
+                "name": "Alias Long-Term Port",
+                "passed": true
+              },
+              {
+                "name": "Alias Long Term Portfolio",
+                "passed": true
+              },
+              {
+                "name": "Unknown portfolio has no default",
+                "passed": true
+              },
+              {
+                "name": "Conflicting aliases rejected",
+                "passed": true
+              },
+              {
+                "name": "Same ticker separated by portfolio",
+                "passed": true
+              },
+              {
+                "name": "Same ticker separated by dataset",
+                "passed": true
+              },
+              {
+                "name": "Same ticker separated by source",
+                "passed": true
+              },
+              {
+                "name": "Delimiter injection blocked",
+                "passed": true
+              },
+              {
+                "name": "Unknown dataset blocked",
+                "passed": true
+              },
+              {
+                "name": "Input gate rejects dataset_id",
+                "passed": true
+              },
+              {
+                "name": "Input gate rejects is_fixture",
+                "passed": true
+              },
+              {
+                "name": "Input gate rejects content_policy",
+                "passed": true
+              },
+              {
+                "name": "Input gate rejects source_id",
+                "passed": true
+              },
+              {
+                "name": "Input gate rejects normalized_text",
+                "passed": true
+              },
+              {
+                "name": "Input gate rejects message_key",
+                "passed": true
+              },
+              {
+                "name": "Origin strips tracking query",
+                "passed": true
+              },
+              {
+                "name": "Origin host spoof rejected",
+                "passed": true
+              },
+              {
+                "name": "Group alone not an event identity",
+                "passed": true
+              },
+              {
+                "name": "Origin credentials rejected",
+                "passed": true
+              },
+              {
+                "name": "Unknown schema keys rejected",
+                "passed": true
+              },
+              {
+                "name": "Missing events rejected",
+                "passed": true
+              },
+              {
+                "name": "Unknown action rejected",
+                "passed": true
+              },
+              {
+                "name": "Wrong source rejected",
+                "passed": true
+              },
+              {
+                "name": "Invented portfolio rejected",
+                "passed": true
+              },
+              {
+                "name": "Cross-section portfolio rejected",
+                "passed": true
+              },
+              {
+                "name": "Missing portfolio evidence rejected",
+                "passed": true
+              },
+              {
+                "name": "Missing ticker rejected",
+                "passed": true
+              },
+              {
+                "name": "Invented ticker rejected",
+                "passed": true
+              },
+              {
+                "name": "Ticker suffix cannot be invented",
+                "passed": true
+              },
+              {
+                "name": "Invented company rejected",
+                "passed": true
+              },
+              {
+                "name": "Invented date rejected",
+                "passed": true
+              },
+              {
+                "name": "Impossible date rejected without crash",
+                "passed": true
+              },
+              {
+                "name": "Missing exact quote rejected",
+                "passed": true
+              },
+              {
+                "name": "Low confidence requires review",
+                "passed": true
+              },
+              {
+                "name": "Duplicate model candidate rejected",
+                "passed": true
+              },
+              {
+                "name": "No trade with uncertainty requires review",
+                "passed": true
+              },
+              {
+                "name": "No trade cannot discard candidate",
+                "passed": true
+              },
+              {
+                "name": "Bought alone cannot become OPEN",
+                "passed": true
+              },
+              {
+                "name": "Snapshot cannot become OPEN",
+                "passed": true
+              },
+              {
+                "name": "Unreported weight rejected",
+                "passed": true
+              },
+              {
+                "name": "Unreported price rejected",
+                "passed": true
+              },
+              {
+                "name": "Currency code not inferred",
+                "passed": true
+              },
+              {
+                "name": "Metadata quote cannot be substituted",
+                "passed": true
+              },
+              {
+                "name": "Quantity field forbidden",
+                "passed": true
+              },
+              {
+                "name": "Explicit numeric metadata preserved",
+                "passed": true
+              },
+              {
+                "name": "Interview tickers excluded from events",
+                "passed": true
+              },
+              {
+                "name": "Mixed message held as a whole",
+                "passed": true
+              },
+              {
+                "name": "Uncertain cannot enter manager",
+                "passed": true
+              },
+              {
+                "name": "Event IDs independent of model array ordering",
+                "passed": true
+              },
+              {
+                "name": "Original 19 events retained",
+                "passed": true
+              },
+              {
+                "name": "Original nine positions retained",
+                "passed": true
+              },
+              {
+                "name": "Original history hashes valid",
+                "passed": true
+              },
+              {
+                "name": "V1 event objects unchanged",
+                "passed": true
+              },
+              {
+                "name": "Two portfolios committed from one message",
+                "passed": true
+              },
+              {
+                "name": "Three distinct NVDA positions including legacy fixture",
+                "passed": true
+              },
+              {
+                "name": "New physical keys include dataset and portfolio",
+                "passed": true
+              },
+              {
+                "name": "Two events share canonical origin",
+                "passed": true
+              },
+              {
+                "name": "MP002 state transition accepted",
+                "passed": true
+              },
+              {
+                "name": "MP003 state transition accepted",
+                "passed": true
+              },
+              {
+                "name": "MP004 state transition accepted",
+                "passed": true
+              },
+              {
+                "name": "MP005 state transition accepted",
+                "passed": true
+              },
+              {
+                "name": "MP006 state transition accepted",
+                "passed": true
+              },
+              {
+                "name": "MP007 state transition accepted",
+                "passed": true
+              },
+              {
+                "name": "MP015 state transition accepted",
+                "passed": true
+              },
+              {
+                "name": "Trading reopen increments its own cycle",
+                "passed": true
+              },
+              {
+                "name": "Long-term cycle remains independent",
+                "passed": true
+              },
+              {
+                "name": "Different author has separate position",
+                "passed": true
+              },
+              {
+                "name": "Exact replay is duplicate",
+                "passed": true
+              },
+              {
+                "name": "Exact replay does not append history",
+                "passed": true
+              },
+              {
+                "name": "New Gmail delivery same post is duplicate",
+                "passed": true
+              },
+              {
+                "name": "Cross-delivery history unchanged",
+                "passed": true
+              },
+              {
+                "name": "Duplicate delivery has its own log",
+                "passed": true
+              },
+              {
+                "name": "Edited post requires review",
+                "passed": true
+              },
+              {
+                "name": "Late event requires review",
+                "passed": true
+              },
+              {
+                "name": "MP008 missing baseline review",
+                "passed": true
+              },
+              {
+                "name": "MP008 no invented OPEN",
+                "passed": true
+              },
+              {
+                "name": "MP009 missing baseline review",
+                "passed": true
+              },
+              {
+                "name": "MP009 no invented OPEN",
+                "passed": true
+              },
+              {
+                "name": "MP010 missing baseline review",
+                "passed": true
+              },
+              {
+                "name": "MP010 no invented OPEN",
+                "passed": true
+              },
+              {
+                "name": "MP008 approved baseline accepted",
+                "passed": true
+              },
+              {
+                "name": "MP008 accepted action without synthetic OPEN",
+                "passed": true
+              },
+              {
+                "name": "MP008 original opening stays unknown",
+                "passed": true
+              },
+              {
+                "name": "MP008 baseline replay is deterministic",
+                "passed": true
+              },
+              {
+                "name": "MP009 approved baseline accepted",
+                "passed": true
+              },
+              {
+                "name": "MP009 accepted action without synthetic OPEN",
+                "passed": true
+              },
+              {
+                "name": "MP009 original opening stays unknown",
+                "passed": true
+              },
+              {
+                "name": "MP009 baseline replay is deterministic",
+                "passed": true
+              },
+              {
+                "name": "MP010 approved baseline accepted",
+                "passed": true
+              },
+              {
+                "name": "MP010 accepted action without synthetic OPEN",
+                "passed": true
+              },
+              {
+                "name": "MP010 original opening stays unknown",
+                "passed": true
+              },
+              {
+                "name": "MP010 baseline replay is deterministic",
+                "passed": true
+              },
+              {
+                "name": "Other portfolio baseline cannot authorize ADD",
+                "passed": true
+              },
+              {
+                "name": "Unapproved baseline blocked",
+                "passed": true
+              },
+              {
+                "name": "Interruption before CHECKPOINT 1",
+                "passed": true
+              },
+              {
+                "name": "Recovery before CHECKPOINT 1",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after before CHECKPOINT 1",
+                "passed": true
+              },
+              {
+                "name": "Interruption after CHECKPOINT 1",
+                "passed": true
+              },
+              {
+                "name": "Recovery after CHECKPOINT 1",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after after CHECKPOINT 1",
+                "passed": true
+              },
+              {
+                "name": "Interruption before HISTORY 1",
+                "passed": true
+              },
+              {
+                "name": "Recovery before HISTORY 1",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after before HISTORY 1",
+                "passed": true
+              },
+              {
+                "name": "Interruption before HISTORY 2",
+                "passed": true
+              },
+              {
+                "name": "Recovery before HISTORY 2",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after before HISTORY 2",
+                "passed": true
+              },
+              {
+                "name": "Interruption after HISTORY 1",
+                "passed": true
+              },
+              {
+                "name": "Recovery after HISTORY 1",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after after HISTORY 1",
+                "passed": true
+              },
+              {
+                "name": "Interruption after HISTORY 2",
+                "passed": true
+              },
+              {
+                "name": "Recovery after HISTORY 2",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after after HISTORY 2",
+                "passed": true
+              },
+              {
+                "name": "Interruption before PROJECTION 1",
+                "passed": true
+              },
+              {
+                "name": "Recovery before PROJECTION 1",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after before PROJECTION 1",
+                "passed": true
+              },
+              {
+                "name": "Interruption before PROJECTION 2",
+                "passed": true
+              },
+              {
+                "name": "Recovery before PROJECTION 2",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after before PROJECTION 2",
+                "passed": true
+              },
+              {
+                "name": "Interruption after PROJECTION 1",
+                "passed": true
+              },
+              {
+                "name": "Recovery after PROJECTION 1",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after after PROJECTION 1",
+                "passed": true
+              },
+              {
+                "name": "Interruption after PROJECTION 2",
+                "passed": true
+              },
+              {
+                "name": "Recovery after PROJECTION 2",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after after PROJECTION 2",
+                "passed": true
+              },
+              {
+                "name": "Interruption before COMPLETE 1",
+                "passed": true
+              },
+              {
+                "name": "Recovery before COMPLETE 1",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after before COMPLETE 1",
+                "passed": true
+              },
+              {
+                "name": "Interruption after COMPLETE 1",
+                "passed": true
+              },
+              {
+                "name": "Recovery after COMPLETE 1",
+                "passed": true
+              },
+              {
+                "name": "No duplicates after after COMPLETE 1",
+                "passed": true
+              },
+              {
+                "name": "Manager rejects mutated validated event",
+                "passed": true
+              },
+              {
+                "name": "Frozen checkpoint tampering requires review",
+                "passed": true
+              },
+              {
+                "name": "Manager retry bounded at three attempts",
+                "passed": true
+              },
+              {
+                "name": "Changed historical header rejected",
+                "passed": true
+              },
+              {
+                "name": "Historical data corruption detected",
+                "passed": true
+              },
+              {
+                "name": "A preserves canonical origin and dataset",
+                "passed": true
+              },
+              {
+                "name": "A freezes multi-event analysis before C",
+                "passed": true
+              },
+              {
+                "name": "A completes only after C verified",
+                "passed": true
+              },
+              {
+                "name": "A notification remains suppressed",
+                "passed": true
+              },
+              {
+                "name": "A preview labels portfolio",
+                "passed": true
+              },
+              {
+                "name": "A routes ambiguous observations to human review",
+                "passed": true
+              },
+              {
+                "name": "A skips Gemini for repeated completed post",
+                "passed": true
+              },
+              {
+                "name": "A changed post reviewed before Gemini",
+                "passed": true
+              },
+              {
+                "name": "Temporary dependency failure schedules retry",
+                "passed": true
+              },
+              {
+                "name": "E selects frozen portfolio request",
+                "passed": true
+              },
+              {
+                "name": "Recovery selection retains portfolio configuration",
+                "passed": true
+              },
+              {
+                "name": "E accepts allowlisted portfolio message target",
+                "passed": true
+              },
+              {
+                "name": "D validates mixed legacy and v2 projections",
+                "passed": true
+              },
+              {
+                "name": "D labels portfolio in fictional positions",
+                "passed": true
+              },
+              {
+                "name": "D history distinguishes portfolios",
+                "passed": true
+              },
+              {
+                "name": "D replies remain previews",
+                "passed": true
+              },
+              {
+                "name": "Fictional v2 evidence passes developer guard",
+                "passed": true
+              },
+              {
+                "name": "Developer guard blocks real event",
+                "passed": true
+              },
+              {
+                "name": "Original historical rows unchanged after new events",
+                "passed": true
+              },
+              {
+                "name": "Original position rows unchanged after new events",
+                "passed": true
+              }
+            ],
+            "external_calls": 0,
+            "real_content_analyzed": 0,
+            "discord_messages_sent": 0
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "E",
+      "node": "Run baseline regression checks",
+      "status": "completed",
+      "output": [
+        {
+          "json": {
+            "status": "PASSED",
+            "unique_scenarios": 32,
+            "assertions": 120,
+            "scenarios": [
+              {
+                "id": "BL-S01",
+                "name": "Baseline-only reconstruction",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S02",
+                "name": "Zero subsequent trades and no fabricated OPEN",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S03",
+                "name": "Interrupted import and missing projection recovery",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S04",
+                "name": "Duplicate import and overlapping batch",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S05",
+                "name": "Invalid approval fails closed",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S06",
+                "name": "Hash mismatch blocks commit and corrupt projection reads",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S07",
+                "name": "Source verification failure",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S08",
+                "name": "Cash exclusion",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S09",
+                "name": "Dataset, source and portfolio isolation",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S10",
+                "name": "OPEN against held baseline",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S11",
+                "name": "ADD against baseline",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S12",
+                "name": "REDUCE against baseline",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S13",
+                "name": "CLOSE against baseline",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S14",
+                "name": "Close then reopen in new holding cycle",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S15",
+                "name": "Unknown snapshot date remains reconstructable but cannot authorize trades",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S16",
+                "name": "Coverage gap and missing baseline review",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S17",
+                "name": "Multi-event evidence and metadata",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S18",
+                "name": "BUY normalization requires verified coverage",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S19",
+                "name": "Holding observations cannot become trades",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S20",
+                "name": "Interview-only mentions",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S21",
+                "name": "Exact ticker suffixes",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S22",
+                "name": "Email/post deduplication and canonical origins",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S23",
+                "name": "Frozen checkpoint recovery and bounded retries",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S24",
+                "name": "Legacy rows, IDs and hashes preserved",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S25",
+                "name": "A routes observations and coverage reviews with suppression",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S26",
+                "name": "D baseline-aware reads remain private previews",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S27",
+                "name": "Missing staged member and orphan recovery are safe",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S28",
+                "name": "Legacy frozen replay coexists with baseline-backed new history",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S29",
+                "name": "New legacy OPEN cannot bypass committed baseline",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S30",
+                "name": "Short evidence quote cannot discard re-entry context",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S31",
+                "name": "54-stock batch fits bounded recovery",
+                "status": "PASSED"
+              },
+              {
+                "id": "BL-S32",
+                "name": "Safe chunk yields preserve retry budget and recover 54 holdings",
+                "status": "PASSED"
+              }
+            ],
+            "checks": [
+              {
+                "scenario": "BL-S01",
+                "name": "three additional positions",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S01",
+                "name": "all rebuilt independently",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S01",
+                "name": "baseline hash included",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S02",
+                "name": "history unchanged",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S02",
+                "name": "zero trades",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S02",
+                "name": "no opening ID",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "recovered after step 0",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "unique positions 0",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "no trades 0",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "recovered after step 1",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "unique positions 1",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "no trades 1",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "recovered after step 2",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "unique positions 2",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "no trades 2",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "recovered after step 3",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "unique positions 3",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "no trades 3",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "recovered after step 4",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "unique positions 4",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "no trades 4",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "recovered after step 5",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "unique positions 5",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "no trades 5",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "recovered after step 6",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "unique positions 6",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "no trades 6",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "E detects missing projection",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S03",
+                "name": "projection repaired",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S04",
+                "name": "same staged batch idempotent",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S04",
+                "name": "overlap reviewed",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S05",
+                "name": "approval review",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S05",
+                "name": "no projections",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S06",
+                "name": "hash review",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S06",
+                "name": "committed corruption detected",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S07",
+                "name": "source review",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S07",
+                "name": "unverified source evidence blocked",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S08",
+                "name": "cash remains log record",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S08",
+                "name": "no stock cash",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S08",
+                "name": "cash key null",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S09",
+                "name": "two independent holdings",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S09",
+                "name": "real import blocked",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S09",
+                "name": "D filters real source",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S10",
+                "name": "contradictory open reviewed",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S10",
+                "name": "holding intact",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S11",
+                "name": "ADD accepted",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S11",
+                "name": "one event no OPEN",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S11",
+                "name": "frozen baseline reference",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S11",
+                "name": "deterministic reconstruction",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S12",
+                "name": "REDUCE accepted",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S12",
+                "name": "still open",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S13",
+                "name": "CLOSE accepted",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S13",
+                "name": "closed with unknown opening",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S14",
+                "name": "reopened",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S14",
+                "name": "cycle two",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S14",
+                "name": "exactly close and reopen",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S15",
+                "name": "undated baseline position",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S15",
+                "name": "date uncertainty review",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S16",
+                "name": "gap not contradiction",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S16",
+                "name": "MISSING_BASELINE retained",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S16",
+                "name": "no invented event",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S17",
+                "name": "two candidates",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S17",
+                "name": "independent portfolios",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S17",
+                "name": "reported values",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S17",
+                "name": "stable evidence order IDs",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S18",
+                "name": "purchase preserved unresolved",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S18",
+                "name": "gap whole message reviewed",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S18",
+                "name": "no partial writes",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S18",
+                "name": "BUY absent becomes OPEN only with coverage",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S18",
+                "name": "BUY held becomes ADD only with coverage",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S18",
+                "name": "Round 2 still requires context",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S19",
+                "name": "observation classification",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S19",
+                "name": "no events and review",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S19",
+                "name": "contradiction is INVALID",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S19",
+                "name": "bad certainty not coerced",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S20",
+                "name": "no trade",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S20",
+                "name": "ticker retained as mention",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S20",
+                "name": "mixed observation interviews not events",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S21",
+                "name": "VIA != VIAV",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S21",
+                "name": "APTX != APTX.TO",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S21",
+                "name": "ATX != ATX.TO",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S21",
+                "name": "EQX != EQX.TO",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S21",
+                "name": "suffix removal rejected",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S22",
+                "name": "replay complete without duplicate",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S22",
+                "name": "history unchanged",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S22",
+                "name": "tracking removed",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S23",
+                "name": "recovery complete",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S23",
+                "name": "checkpoint unchanged",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S23",
+                "name": "frozen conflict reviewed",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S23",
+                "name": "retry bounded",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S24",
+                "name": "all 21 original trades byte equivalent",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S24",
+                "name": "all 11 original positions byte equivalent",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S24",
+                "name": "original history reconstructs",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S25",
+                "name": "observation review",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S25",
+                "name": "frozen evidence retained",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S25",
+                "name": "C coverage propagates to A review",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S25",
+                "name": "suppressed",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S26",
+                "name": "D consistency verifies baseline-only rows",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S26",
+                "name": "baseline distinction",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S26",
+                "name": "suppressed preview",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S27",
+                "name": "missing durable member reviewed",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S27",
+                "name": "orphan detected",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S28",
+                "name": "old frozen operation replays",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S28",
+                "name": "no history mutation",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S29",
+                "name": "legacy contract review required",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S29",
+                "name": "no duplicate OPEN",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S30",
+                "name": "Round 2 found outside model quote",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S30",
+                "name": "other portfolio unaffected",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S31",
+                "name": "54 positions plus two cash",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S31",
+                "name": "bounded at 120 steps",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S31",
+                "name": "zero additional trade events",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S31",
+                "name": "all 54 independently reconstructed",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S32",
+                "name": "safe completed or yielded run 1",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S32",
+                "name": "safe completed or yielded run 2",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S32",
+                "name": "safe completed or yielded run 3",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S32",
+                "name": "safe completed or yielded run 4",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S32",
+                "name": "full batch completed within bounded runs",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S32",
+                "name": "planned pauses do not consume error retries",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S32",
+                "name": "54 unique positions",
+                "passed": true
+              },
+              {
+                "scenario": "BL-S32",
+                "name": "no extra history",
+                "passed": true
+              }
+            ],
+            "external_calls": 0
+          }
+        }
+      ]
+    }
+  ]
+}

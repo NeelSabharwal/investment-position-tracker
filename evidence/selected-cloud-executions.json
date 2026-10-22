@@ -1,0 +1,166 @@
+[
+  {
+    "workflow": "A",
+    "workflow_id": "YEgEdoioirlXidpK",
+    "execution_id": "1010",
+    "mode": "integrated",
+    "status": "success",
+    "startedAt": "2026-10-22T11:51:53.181Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/YEgEdoioirlXidpK/executions/1010",
+    "tag_saved": true,
+    "tag": "DEMO Manual replay",
+    "why": "Manually initiated replay of a real Gmail notification. Child run stops at the existing-intake checkpoint; B and C do not run. Shows duplicate prevention, not new trade processing.",
+    "show": [
+      "Prepare live intake checkpoint"
+    ]
+  },
+  {
+    "workflow": "B",
+    "workflow_id": "TOCdQCy0xx0WMLLT",
+    "execution_id": "1032",
+    "mode": "manual",
+    "status": "success",
+    "startedAt": "2026-10-22T11:59:11.803Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/TOCdQCy0xx0WMLLT/executions/1032",
+    "tag_saved": true,
+    "tag": "DEMO Manual AI checks",
+    "why": "50/50 deterministic checks using mock AI and in-memory Sheets. Does not demonstrate a live Gemini call.",
+    "show": [
+      "Run 50 fictional checks",
+      "Verify real preview safeguards"
+    ]
+  },
+  {
+    "workflow": "C",
+    "workflow_id": "6AbLgQwiR3KzKJ83",
+    "execution_id": "1024",
+    "mode": "manual",
+    "status": "success",
+    "startedAt": "2026-10-22T11:55:45.479Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/6AbLgQwiR3KzKJ83/executions/1024",
+    "tag_saved": true,
+    "tag": "DEMO Manual positions",
+    "why": "54/54 checks including state transitions, recovery and approved October reconciliation. In-memory test; no real Sheets writes.",
+    "show": [
+      "Run 50 fixture and recovery checks"
+    ]
+  },
+  {
+    "workflow": "D",
+    "workflow_id": "6oUxCXrJa2EiqgEn",
+    "execution_id": "776",
+    "mode": "manual",
+    "status": "success",
+    "startedAt": "2026-10-22T07:36:20.621Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/6oUxCXrJa2EiqgEn/executions/776",
+    "tag_saved": true,
+    "tag": "DEMO Manual commands",
+    "why": "Saved command regression with signature, authorization, database read previews and arithmetic checks. No live Discord reply sent. Production execution saving is currently disabled.",
+    "show": [
+      "Run signature and command checks",
+      "Verify private reply database previews",
+      "Test analysis dispatch and ownership"
+    ]
+  },
+  {
+    "workflow": "E",
+    "workflow_id": "dVNGCbyQwSKhrfee",
+    "execution_id": "1041",
+    "mode": "trigger",
+    "status": "success",
+    "startedAt": "2026-10-22T12:10:19.139Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/dVNGCbyQwSKhrfee/executions/1041",
+    "tag_saved": true,
+    "tag": "DEMO Auto scan no work",
+    "why": "Automatic scheduled recovery scan. No delivery was due; this is not a successful repair of a failed operation.",
+    "show": [
+      "Recovery schedule - every 5 minutes",
+      "Select one bounded live retry",
+      "Resume one durable delivery"
+    ]
+  },
+  {
+    "workflow": "F",
+    "workflow_id": "jriq2lXH1z6OncZ4",
+    "execution_id": "451",
+    "mode": "integrated",
+    "status": "success",
+    "startedAt": "2026-10-22T01:00:52.511Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/jriq2lXH1z6OncZ4/executions/451",
+    "tag_saved": true,
+    "tag": "DEMO Real AI briefing",
+    "why": "Real newsletter worker invoked as a subworkflow during recovery. Calls Gemini, validates the brief, persists rows and returns NEWS_PAYLOAD_READY to I. This execution itself does not send the Discord message.",
+    "show": [
+      "Gemini 3.5 Flash-Lite - real news",
+      "Validate grounded brief and prepare rows",
+      "Build creator-news message"
+    ]
+  },
+  {
+    "workflow": "G",
+    "workflow_id": "Jp6YtSY1fYUgOBRA",
+    "execution_id": "988",
+    "mode": "trigger",
+    "status": "success",
+    "startedAt": "2026-10-22T11:45:45.091Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/Jp6YtSY1fYUgOBRA/executions/988",
+    "tag_saved": true,
+    "tag": "DEMO Auto live relay",
+    "why": "Scheduled real Watcher Guru post processing; verified WATCHER_GURU_RELAYED receipt with text preserved.",
+    "show": [
+      "Select unseen real posts",
+      "Deliver through durable queue",
+      "Verify Watcher Guru relay"
+    ]
+  },
+  {
+    "workflow": "H",
+    "workflow_id": "wx6SMGWZplbmATaZ",
+    "execution_id": "1044",
+    "mode": "trigger",
+    "status": "success",
+    "startedAt": "2026-10-22T12:10:57.157Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/wx6SMGWZplbmATaZ/executions/1044",
+    "tag_saved": true,
+    "tag": "DEMO Auto poll no post",
+    "why": "Scheduled real New Rules poll checks 20 posts and finds none new. Zero Discord messages; demonstrates successful idle polling only.",
+    "show": [
+      "Select unseen real posts",
+      "Return no new posts"
+    ]
+  },
+  {
+    "workflow": "I",
+    "workflow_id": "yriiOojcRgN2BhCM",
+    "execution_id": "989",
+    "mode": "integrated",
+    "status": "success",
+    "startedAt": "2026-10-22T11:45:48.112Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/yriiOojcRgN2BhCM/executions/989",
+    "tag_saved": true,
+    "tag": "DEMO Live delivery",
+    "why": "Real Watcher Guru delivery subworkflow, completed on first attempt with a saved Discord receipt and released lock.",
+    "show": [
+      "Save attempt checkpoint",
+      "Send one Discord message",
+      "Return verified delivery status"
+    ]
+  },
+  {
+    "workflow": "J",
+    "workflow_id": "R68SWpvj3874vTpN",
+    "execution_id": "888",
+    "mode": "manual",
+    "status": "success",
+    "startedAt": "2026-10-22T09:47:29.414Z",
+    "url": "https://neelsabh.app.n8n.cloud/workflow/R68SWpvj3874vTpN/executions/888",
+    "tag_saved": true,
+    "tag": "DEMO Manual recovery",
+    "why": "Full fictional recovery demonstration passed: simulated pre-send 503, retry succeeds on attempt two, repeated completed job is skipped, zero position changes. Tests I directly, not E's scheduled trigger.",
+    "show": [
+      "Verify durable retry checkpoint",
+      "Verify successful recovery",
+      "Show final demonstration proof"
+    ]
+  }
+]
