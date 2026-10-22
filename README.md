@@ -2,6 +2,8 @@
 
 Private, individual Level 3 n8n project by Neel Sabharwal. This repository preserves the existing Investment Position Tracker, personal portfolio commands, newsletter briefs, and Telegram-to-Discord relays. It prepares a later Windows/Docker migration; it does not deploy or replace the running n8n Cloud system.
 
+This is a versioned snapshot, not automatic synchronization with n8n Cloud. Future workflow changes must be exported, reviewed for sensitive inputs, tested and committed. Preserve both draft and published provenance when they differ. No paid n8n Git/source-control feature is required for this export-based workflow.
+
 ## Start here
 
 - [Architecture and workflow guide](docs/architecture.md)

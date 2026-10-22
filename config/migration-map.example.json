@@ -1,0 +1,39 @@
+{
+  "base_url": "http://localhost:5678",
+  "allow_existing_sheets": false,
+  "workflow_ids": {
+    "A": "REPLACE_LOCAL_A",
+    "B": "REPLACE_LOCAL_B",
+    "C": "REPLACE_LOCAL_C",
+    "D": "REPLACE_LOCAL_D",
+    "E": "REPLACE_LOCAL_E",
+    "F": "REPLACE_LOCAL_F",
+    "G": "REPLACE_LOCAL_G",
+    "H": "REPLACE_LOCAL_H",
+    "I": "REPLACE_LOCAL_I",
+    "J": "REPLACE_LOCAL_J"
+  },
+  "sheet_ids": {
+    "creator": "REPLACE_TEST_CREATOR_SHEET_ID",
+    "personal": "REPLACE_TEST_PERSONAL_SHEET_ID",
+    "news": "REPLACE_TEST_NEWS_SHEET_ID"
+  },
+  "credentials": {
+    "googleSheetsOAuth2Api": {
+      "id": "REPLACE_LOCAL_CREDENTIAL_ID",
+      "name": "Google Sheets account"
+    },
+    "gmailOAuth2": {
+      "id": "REPLACE_LOCAL_CREDENTIAL_ID",
+      "name": "Gmail account"
+    },
+    "discordBotApi": {
+      "id": "REPLACE_LOCAL_CREDENTIAL_ID",
+      "name": "Substack Position Tracker"
+    },
+    "googlePalmApi": {
+      "id": "REPLACE_LOCAL_CREDENTIAL_ID",
+      "name": "Google Gemini(PaLM) Api account"
+    }
+  }
+}
