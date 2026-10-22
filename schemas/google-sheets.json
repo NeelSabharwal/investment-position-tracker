@@ -1,0 +1,293 @@
+{
+  "creator_database": "1re2wClNHgrLDp8uSXF4Leb_TqPLV4jTW7OGxR2sKjqM",
+  "personal_database": "13eDJnuSS2Fq_1QSC3tEo8kYpUsyonyaB3ifrmjmibdc",
+  "news_database": "1-yhFwFQEUMf8f_6_6qkvtdSgoEbaDgg90B0L4dQ1dmA",
+  "position_identity": [
+    "dataset_id",
+    "source_id",
+    "portfolio_id",
+    "ticker"
+  ],
+  "sheets": {
+    "creator": {
+      "Sources": {
+        "header_row": 1,
+        "headers": [
+          "source_id",
+          "newsletter_name",
+          "sender_emails_json",
+          "list_ids_json",
+          "author_rule_json",
+          "enabled",
+          "content_policy",
+          "default_timezone",
+          "ticker_aliases_json",
+          "source_rules_json",
+          "config_version",
+          "identity_verified_at",
+          "notes",
+          "dataset_id",
+          "portfolios_json"
+        ]
+      },
+      "Trade History": {
+        "header_row": 1,
+        "headers": [
+          "event_id",
+          "operation_id",
+          "message_key",
+          "source_id",
+          "position_key",
+          "event_index",
+          "ticker",
+          "company_name",
+          "action",
+          "announcement_date",
+          "announced_at",
+          "effective_at",
+          "time_basis",
+          "accepted_at",
+          "evidence_json",
+          "cycle_id",
+          "previous_event_id",
+          "payload_hash",
+          "analysis_version",
+          "review_id",
+          "schema_version",
+          "dataset_id",
+          "portfolio_id",
+          "origin_item_key",
+          "reported_metadata_json"
+        ]
+      },
+      "Current Positions": {
+        "header_row": 1,
+        "headers": [
+          "position_key",
+          "source_id",
+          "ticker",
+          "company_name",
+          "status",
+          "cycle_id",
+          "cycle_number",
+          "opened_event_id",
+          "closed_event_id",
+          "last_event_id",
+          "last_action",
+          "latest_effective_at",
+          "accepted_event_count",
+          "projection_hash",
+          "rebuilt_at",
+          "dataset_id",
+          "portfolio_id",
+          "baseline_record_id",
+          "schema_version"
+        ]
+      },
+      "Processing Log": {
+        "header_row": 1,
+        "headers": [
+          "record_id",
+          "record_type",
+          "message_key",
+          "gmail_message_id",
+          "source_id",
+          "received_at",
+          "content_hash",
+          "origin_ref",
+          "operation_id",
+          "stage",
+          "status",
+          "analysis_checkpoint_json",
+          "progress_json",
+          "notification_json",
+          "attempt_count",
+          "next_retry_at",
+          "error_category",
+          "error_code",
+          "error_summary",
+          "review_json",
+          "execution_id",
+          "created_at",
+          "updated_at",
+          "completed_at",
+          "schema_version",
+          "dataset_id"
+        ]
+      }
+    },
+    "personal": {
+      "Schema Notes": {
+        "header_row": 2,
+        "headers": [
+          "Field / rule",
+          "Meaning",
+          "Constraint"
+        ]
+      },
+      "Import Log": {
+        "header_row": 2,
+        "headers": [
+          "Import ID",
+          "Source File",
+          "File SHA-256",
+          "Imported At (UTC)",
+          "Rows",
+          "Distinct Symbols",
+          "First Trade Date",
+          "Last Trade Date",
+          "Quote Date",
+          "Completeness",
+          "Currency Status",
+          "Validation",
+          "Notes"
+        ]
+      },
+      "Personal Trade History": {
+        "header_row": 2,
+        "headers": [
+          "Transaction ID",
+          "Import ID",
+          "Source Row",
+          "Symbol",
+          "Trade Date",
+          "Transaction Type",
+          "Quantity",
+          "Purchase Price",
+          "Commission",
+          "Signed Quantity",
+          "Export Current Price",
+          "Quote Date",
+          "Quote Time",
+          "Change",
+          "Open",
+          "High",
+          "Low",
+          "Volume",
+          "High Limit",
+          "Low Limit",
+          "Comment",
+          "Source",
+          "Currency",
+          "Imported At (UTC)",
+          "Realized Gain/Loss",
+          "Discord Interaction ID"
+        ]
+      },
+      "Current Positions": {
+        "header_row": 2,
+        "headers": [
+          "Position ID",
+          "Portfolio ID",
+          "Portfolio",
+          "Symbol",
+          "Currency",
+          "Transaction Count",
+          "Buy Quantity",
+          "Sell Quantity",
+          "Derived Net Quantity",
+          "Average Reported Buy Price",
+          "Derived Status",
+          "Export Current Price",
+          "Quote Date",
+          "Quote Time",
+          "Latest Trade Date",
+          "Import ID",
+          "Imported At (UTC)",
+          "History Completeness",
+          "Price Note",
+          "Remaining Cost Basis",
+          "Latest Valuation Price",
+          "Valuation As Of",
+          "Valuation Source",
+          "Unrealized Gain/Loss",
+          "Realized Gain/Loss",
+          "Total Gain/Loss"
+        ]
+      }
+    },
+    "news": {
+      "Article Metadata": {
+        "header_row": 2,
+        "headers": [
+          "article_id",
+          "source_id",
+          "message_id",
+          "received_at",
+          "published_at",
+          "title",
+          "url",
+          "content_sha256",
+          "window_hours",
+          "facts_json",
+          "opinions_json",
+          "limitations_json",
+          "processed_at",
+          "model",
+          "dataset"
+        ]
+      },
+      "Generated Briefs": {
+        "header_row": 2,
+        "headers": [
+          "brief_id",
+          "window_start",
+          "window_end",
+          "source_count",
+          "article_count",
+          "brief_text",
+          "provenance_json",
+          "limitations_json",
+          "created_at",
+          "model",
+          "dataset",
+          "status"
+        ]
+      },
+      "Processing Log": {
+        "header_row": 2,
+        "headers": [
+          "record_id",
+          "article_id",
+          "stage",
+          "status",
+          "attempt_count",
+          "error_code",
+          "error_summary",
+          "created_at",
+          "updated_at",
+          "dataset"
+        ]
+      },
+      "Authorized Sources": {
+        "header_row": 2,
+        "headers": [
+          "source_id",
+          "display_name",
+          "sender_pattern",
+          "enabled",
+          "content_authorized",
+          "dataset",
+          "notes"
+        ]
+      }
+    }
+  },
+  "delivery_job": {
+    "table": "creator / Processing Log",
+    "record_type": "DELIVERY_JOB",
+    "schema": "delivery-1.0 checkpoint inside schema_version 2.1 row",
+    "states": [
+      "STAGED",
+      "PROCESSING",
+      "IN_FLIGHT",
+      "RETRY_WAIT",
+      "COMPLETE",
+      "REVIEW"
+    ],
+    "attempt_limit": 3,
+    "identity": "Gmail message ID or SHA256 of relay/demonstration message key",
+    "recovery": "Frozen payload; exact-owner lock; readback; unique marker reconciliation. Unknown outcome requires review."
+  },
+  "provenance": "Header definitions captured in the completed project on 2026-10-22; no row data. Not a fresh database backup."
+}

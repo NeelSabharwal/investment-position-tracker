@@ -1,0 +1,527 @@
+{
+  "name": "Preserve paired records and organize delivery",
+  "nodes": [
+    {
+      "id": "52c9b8fa-5c53-4633-bea8-4f55e11f1d70",
+      "name": "Manual - real source probe",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "92fd70b7-9bd9-4b6a-b382-b13fb29f3685",
+      "name": "Fetch Watcher Guru public feed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://t.me/s/WatcherGuru",
+        "options": {
+          "timeout": 30000,
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          },
+          "response": {
+            "response": {
+              "responseFormat": "text",
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "onError": "stopWorkflow",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "d5426783-5e39-4fcf-8764-6e2c368881a9",
+      "name": "Parse real Telegram posts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const r=$input.first().json;\nconst html=String(r.body??r.data??'');\nif(Number(r.statusCode)!==200) throw new Error('TELEGRAM_HTTP_'+r.statusCode);\nconst parts=html.split('data-post=\"WatcherGuru/').slice(1);\nconst posts=[];\nconst decode=s=>s\n  .replace(/<br\\s*\\/?\\s*>/gi,'\\n')\n  .replace(/<a[^>]*>([\\s\\S]*?)<\\/a>/gi,'$1')\n  .replace(/<[^>]+>/g,'')\n  .replace(/&nbsp;/g,' ')\n  .replace(/&amp;/g,'&')\n  .replace(/&quot;/g,'\"')\n  .replace(/&#39;|&apos;/g,\"'\")\n  .replace(/&#036;/g,'$')\n  .replace(/&lt;/g,'<')\n  .replace(/&gt;/g,'>')\n  .trim();\nfor(const part of parts){\n  const id=(part.match(/^(\\d+)/)||[])[1];\n  const m=part.match(/tgme_widget_message_text[^>]*>([\\s\\S]*?)<\\/div>/i);\n  const dt=(part.match(/<time datetime=\"([^\"]+)\"/i)||[])[1]||'';\n  if(id&&m){\n    const text=decode(m[1]);\n    if(text) posts.push({\n      source_id:'watcher_guru',\n      telegram_post_id:id,\n      message_key:'telegram:WatcherGuru:'+id,\n      record_id:'relay:watcher_guru:'+id,\n      text,\n      published_at:dt,\n      source_url:'https://t.me/WatcherGuru/'+id\n    });\n  }\n}\nif(!posts.length) throw new Error('NO_STABLE_POSTS_PARSED');\nposts.sort((a,b)=>Number(a.telegram_post_id)-Number(b.telegram_post_id));\nreturn [{json:{posts:posts.slice(-20),fetched_at:new Date().toISOString()}}];"
+      }
+    },
+    {
+      "id": "0d4f9ce5-9191-4d53-9c55-c11c1cff1f54",
+      "name": "Sticky Note e72f6b50",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        224,
+        -96
+      ],
+      "parameters": {
+        "content": "## Watcher Guru live relay\nPublic Telegram preview → stable post ID parsing → Google Sheets dedup → exact text to private #guru-news → durable receipt.\n\nFirst run sends only the newest post, so historical backlog is suppressed. No Gemini, no fictional fixture, and no portfolio writes.",
+        "color": 5,
+        "width": 480,
+        "height": 256
+      }
+    },
+    {
+      "id": "88f2e144-ac82-44e7-8d61-e71ee6049d85",
+      "name": "Every 5 minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 5
+            }
+          ]
+        }
+      },
+      "disabled": false
+    },
+    {
+      "id": "3b0d0ec8-03fa-47c0-8ce7-a4db3d5779e9",
+      "name": "Read Watcher Guru relay receipts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        690,
+        120
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://sheets.googleapis.com/v4/spreadsheets/1re2wClNHgrLDp8uSXF4Leb_TqPLV4jTW7OGxR2sKjqM/values/'Processing%20Log'!A1%3AZ5000?valueRenderOption=UNFORMATTED_VALUE",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleSheetsOAuth2Api",
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "responseFormat": "json",
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "onError": "stopWorkflow",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "71daa5ac-636a-4e00-868c-b9bb390df180",
+      "name": "Select unseen real posts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        930,
+        120
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const crypto=require('crypto');\nconst r=$input.first().json,b=r.body??r;\nif(Number(r.statusCode)!==200||!Array.isArray(b.values)) throw Error('GURU_LOG_READ_FAILED');\nconst h=['record_id','record_type','message_key','gmail_message_id','source_id','received_at','content_hash','origin_ref','operation_id','stage','status','analysis_checkpoint_json','progress_json','notification_json','attempt_count','next_retry_at','error_category','error_code','error_summary','review_json','execution_id','created_at','updated_at','completed_at','schema_version','dataset_id'];\nif(JSON.stringify(b.values[0]||[])!==JSON.stringify(h)) throw Error('GURU_LOG_SCHEMA_MISMATCH');\nconst rows=b.values.slice(1).filter(x=>x.some(v=>v!==''&&v!=null)).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]??''])));\nconst posts=$('Parse real Telegram posts').first().json.posts;\nconst done=rows.filter(x=>x.record_type==='PUBLIC_NEWS_RELAY'&&x.source_id==='watcher_guru'&&x.status==='COMPLETE');\nconst doneKeys=new Set(done.map(x=>x.record_id));\nconst doneIds=done.map(x=>Number(String(x.record_id).split(':').pop())).filter(Number.isFinite);\nconst maxDone=doneIds.length?Math.max(...doneIds):null,firstDone=doneIds.length?Math.min(...doneIds):null;\nlet candidates=maxDone===null?[posts[posts.length-1]]:posts.filter(p=>Number(p.telegram_post_id)>firstDone&&!doneKeys.has(p.record_id));\ncandidates=candidates.slice(0,5);\nif(!candidates.length) return [{json:{route:'NO_OP',status:'NO_NEW_POSTS',highest_completed:maxDone,checked_posts:posts.length}}];\nreturn candidates.map(p=>({json:{route:'SEND',...p,content_sha256:crypto.createHash('sha256').update(p.text).digest('hex')}}));"
+      }
+    },
+    {
+      "id": "7aa02e8d-5233-4e27-9cae-66e348d9749b",
+      "name": "New post decision",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1170,
+        120
+      ],
+      "parameters": {
+        "mode": "expression",
+        "numberOutputs": 2,
+        "output": "={{ $json.route === 'NO_OP' ? 0 : 1 }}"
+      }
+    },
+    {
+      "id": "880b6b0e-8ab4-4eb2-8a8f-9054462a22c5",
+      "name": "Return no new posts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1410,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "return [{json:{status:'NO_OP',reason:'NO_NEW_WATCHER_GURU_POSTS',highest_completed:$json.highest_completed,checked_posts:$json.checked_posts,discord_messages:0}}];"
+      }
+    },
+    {
+      "id": "daf87b59-444b-42ab-b3cd-4ee8eaaa5ea5",
+      "name": "Build exact Discord message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1410,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "javaScript",
+        "jsCode": "const p=$json;\nif(p.route!=='SEND'||p.source_id!=='watcher_guru'||!/^\\d+$/.test(p.telegram_post_id)||!p.text) throw Error('GURU_RELAY_INPUT_INVALID');\nif(p.text.length>2000) throw Error('GURU_POST_EXCEEDS_DISCORD_LIMIT');\nconst nonce=require('crypto').createHash('sha256').update(p.message_key).digest('hex').slice(0,24);\nreturn {json:{...p,discord_body:{content:p.text,allowed_mentions:{parse:[]},nonce,enforce_nonce:true}}};"
+      }
+    },
+    {
+      "id": "ca28c40a-d8f7-4c06-8e56-b8edda57a7f1",
+      "name": "Send to guru-news",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1650,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://discord.com/api/v10/channels/1562584181547081838/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "discordBotApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.discord_body) }}",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "responseFormat": "json",
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "onError": "stopWorkflow",
+      "retryOnFail": false,
+      "disabled": true
+    },
+    {
+      "id": "fafb8b8e-201e-4c33-9f9e-7bb32c316425",
+      "name": "Prepare durable relay receipt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1890,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "javaScript",
+        "jsCode": "const r=$json,b=r.body??r,p=$('Build exact Discord message').item.json;\nconst ok=Number(r.statusCode)===200&&typeof b.id==='string'&&b.channel_id==='1562584181547081838'&&b.content===p.text;\nif(!ok) throw Error('GURU_DISCORD_DELIVERY_FAILED:'+String(r.statusCode||'UNKNOWN')+':'+String(b.message||''));\nconst now=new Date().toISOString();\nconst checkpoint=JSON.stringify({telegram_post_id:p.telegram_post_id,text:p.text,published_at:p.published_at,source_url:p.source_url});\nconst notification=JSON.stringify({channel_id:b.channel_id,message_id:b.id,content_sha256:p.content_sha256});\nconst row=[p.record_id,'PUBLIC_NEWS_RELAY',p.message_key,'',p.source_id,p.published_at||now,p.content_sha256,p.source_url,'relay:'+p.telegram_post_id,'DISCORD_RELAY','COMPLETE',checkpoint,JSON.stringify({source_fetch:'COMPLETE',discord_send:'COMPLETE'}),notification,1,'','','','',JSON.stringify({manual_review_required:false}),$execution.id,now,now,now,'2.0','real'];\nreturn {json:{record_id:p.record_id,telegram_post_id:p.telegram_post_id,text:p.text,channel_id:b.channel_id,message_id:b.id,append_body:{values:[row]}}};"
+      }
+    },
+    {
+      "id": "c64affbf-0cec-4a6b-964d-e49ff4073ea5",
+      "name": "Append Watcher Guru receipt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2130,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://sheets.googleapis.com/v4/spreadsheets/1re2wClNHgrLDp8uSXF4Leb_TqPLV4jTW7OGxR2sKjqM/values/'Processing%20Log'!A%3AZ:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleSheetsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.append_body) }}",
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "responseFormat": "json",
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "1112c085-179c-441c-8e8f-ebba9777fe1b",
+      "name": "Verify Watcher Guru relay",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2370,
+        220
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "javaScript",
+        "jsCode": "const r=$json,b=r.body??r,p=$('Prepare durable relay receipt').item.json;\nif(Number(r.statusCode)!==200||Number(b.updates?.updatedRows)!==1) throw Error('GURU_RECEIPT_APPEND_FAILED');\nreturn {json:{status:'WATCHER_GURU_RELAYED',record_id:p.record_id,telegram_post_id:p.telegram_post_id,channel_id:p.channel_id,message_id:p.message_id,durable_receipt:true,text_preserved:true}};"
+      }
+    },
+    {
+      "id": "8571c035-72af-4947-8395-e055b31ab4d0",
+      "name": "Prepare durable relay job",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2100,
+        700
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "javaScript",
+        "jsCode": "const p=$json;return {json:{mode:'delivery',delivery_key:p.message_key,payload:{channel_id:'1562584181547081838',content:p.discord_body.content,source_id:p.source_id,source_url:p.source_url||'',attachment_text:p.delivery_kind==='attachment'?p.text:null,file_name:p.delivery_kind==='attachment'?p.file_name:null}}};"
+      }
+    },
+    {
+      "id": "fda14061-5e74-421b-8102-cd50a53d783e",
+      "name": "Deliver through durable queue",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2360,
+        700
+      ],
+      "parameters": {
+        "mode": "each",
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "yriiOojcRgN2BhCM"
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      }
+    },
+    {
+      "id": "6108ec76-046a-4bb2-83d2-4e5c11be0a0a",
+      "name": "Use confirmed durable receipt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2620,
+        700
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "return $input.all().map((i,index)=>i.json.status==='COMPLETE'&&i.json.discord_message?.id?{json:{statusCode:200,body:i.json.discord_message},pairedItem:{item:index}}:null).filter(Boolean);"
+      }
+    }
+  ],
+  "connections": {
+    "Manual - real source probe": {
+      "main": [
+        [
+          {
+            "node": "Fetch Watcher Guru public feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Watcher Guru public feed": {
+      "main": [
+        [
+          {
+            "node": "Parse real Telegram posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse real Telegram posts": {
+      "main": [
+        [
+          {
+            "node": "Read Watcher Guru relay receipts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Watcher Guru relay receipts": {
+      "main": [
+        [
+          {
+            "node": "Select unseen real posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select unseen real posts": {
+      "main": [
+        [
+          {
+            "node": "New post decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New post decision": {
+      "main": [
+        [
+          {
+            "node": "Return no new posts",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build exact Discord message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare durable relay receipt": {
+      "main": [
+        [
+          {
+            "node": "Append Watcher Guru receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append Watcher Guru receipt": {
+      "main": [
+        [
+          {
+            "node": "Verify Watcher Guru relay",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Every 5 minutes": {
+      "main": [
+        [
+          {
+            "node": "Fetch Watcher Guru public feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build exact Discord message": {
+      "main": [
+        [
+          {
+            "node": "Prepare durable relay job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare durable relay job": {
+      "main": [
+        [
+          {
+            "node": "Deliver through durable queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deliver through durable queue": {
+      "main": [
+        [
+          {
+            "node": "Use confirmed durable receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Use confirmed durable receipt": {
+      "main": [
+        [
+          {
+            "node": "Prepare durable relay receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "UTC",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "executionTimeout": 120,
+    "errorWorkflow": "dVNGCbyQwSKhrfee",
+    "binaryMode": "separate"
+  },
+  "active": false,
+  "pinData": {},
+  "tags": [],
+  "nodeGroups": [
+    {
+      "id": "90f86118-5c0a-4631-8443-e9ad7310daee",
+      "name": "Fetch and deduplicate",
+      "nodeNames": [
+        "Fetch Watcher Guru public feed",
+        "Parse real Telegram posts",
+        "Read Watcher Guru relay receipts",
+        "Select unseen real posts"
+      ],
+      "description": "Real public Watcher Guru source, stable ID parsing, and durable receipt lookup."
+    },
+    {
+      "id": "7c084914-0fb4-4e1d-a09e-9a8b55e0f9d4",
+      "name": "Private durable Discord delivery",
+      "nodeNames": [
+        "New post decision",
+        "Return no new posts",
+        "Build exact Discord message",
+        "Prepare durable relay receipt",
+        "Append Watcher Guru receipt",
+        "Verify Watcher Guru relay",
+        "Prepare durable relay job",
+        "Deliver through durable queue",
+        "Use confirmed durable receipt"
+      ]
+    }
+  ]
+}

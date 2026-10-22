@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+config/local*.json
+config/migration-map.local.json
+backups/
+data/
+private/
+node_modules/
+__pycache__/
+*.pyc
+*.log
+generated/
+*.dump
+*.sqlite*
+credentials*.json

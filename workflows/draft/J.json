@@ -1,0 +1,273 @@
+{
+  "name": "One-click failure and recovery proof",
+  "nodes": [
+    {
+      "id": "9b282239-9ab5-4c1c-91aa-ae8b7bf8dcea",
+      "name": "Manual - demonstrate retry and duplicate safety",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "aa4e1aaa-829d-4b09-96fe-f6ac99353416",
+      "name": "Prepare isolated fictional demonstration",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        128
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const key='professor-demo:'+String($execution.id);return [{json:{mode:'demo',scenario:'TEMP_503',delivery_key:key,payload:{channel_id:'1561104781714526228',source_id:'recovery_demo',content:'[FICTIONAL RECOVERY DEMONSTRATION]\\nDemonstration '+String($execution.id)+'\\nThe first attempt simulated a temporary service failure before sending. This single message arrived after a bounded retry.\\nNo personal or creator positions were changed.'}}}];"
+      }
+    },
+    {
+      "id": "ee22657f-dda9-4e23-a0ac-e026efe414d2",
+      "name": "Attempt one - simulated temporary failure",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        496,
+        128
+      ],
+      "parameters": {
+        "mode": "each",
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "yriiOojcRgN2BhCM"
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      }
+    },
+    {
+      "id": "0d901180-a6d4-4fad-8a1d-9e45fa58444b",
+      "name": "Verify durable retry checkpoint",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        128
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const r=$input.first().json;if(r.status!=='RETRY_WAIT'||r.attempt_count!==1||r.message_id!==null)throw Error('DEMO_FIRST_ATTEMPT_FAILED');return [{json:{...$('Prepare isolated fictional demonstration').first().json,first_attempt:r}}];"
+      }
+    },
+    {
+      "id": "c8b80ceb-097f-4f15-99f3-3bb36b728e71",
+      "name": "Wait for retry due time",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        944,
+        128
+      ],
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 20,
+        "unit": "seconds"
+      },
+      "webhookId": "de15961b-9af4-4a49-b9cd-45865f09b368"
+    },
+    {
+      "id": "5531b2ad-a2eb-4fe1-9c8e-015f5185793d",
+      "name": "Attempt two - recover and deliver",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1168,
+        128
+      ],
+      "parameters": {
+        "mode": "each",
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "yriiOojcRgN2BhCM"
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      }
+    },
+    {
+      "id": "056c748e-e9cd-408f-a2c0-9776f335ef9b",
+      "name": "Verify successful recovery",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1392,
+        128
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const r=$input.first().json;if(r.status!=='COMPLETE'||r.attempt_count!==2||!r.message_id)throw Error('DEMO_RECOVERY_FAILED');return [{json:$('Prepare isolated fictional demonstration').first().json}];"
+      }
+    },
+    {
+      "id": "1e06b0fc-2c65-43e6-b109-b14f0cdb0ced",
+      "name": "Repeat completed job - duplicate check",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1616,
+        128
+      ],
+      "parameters": {
+        "mode": "each",
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "yriiOojcRgN2BhCM"
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      }
+    },
+    {
+      "id": "f428356a-1d89-4fa4-84eb-cd17120325ac",
+      "name": "Show final demonstration proof",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1840,
+        128
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const a=$('Attempt one - simulated temporary failure').first().json,b=$('Attempt two - recover and deliver').first().json,c=$input.first().json;if(c.status!=='COMPLETE'||c.duplicate!==true||c.message_id!==b.message_id||c.attempt_count!==2)throw Error('DEMO_DUPLICATE_CHECK_FAILED');return [{json:{status:'DEMONSTRATION_PASSED',failure:'SIMULATED_PRE_SEND_503',first_status:a.status,retry_status:b.status,attempts:2,discord_message_id:b.message_id,duplicate_skipped:true,position_changes:0,dataset:'fictional',record_id:b.record_id,channel_url:'https://discord.com/channels/1561045409378467900/1561104781714526228/'+b.message_id}}];"
+      }
+    }
+  ],
+  "connections": {
+    "Manual - demonstrate retry and duplicate safety": {
+      "main": [
+        [
+          {
+            "node": "Prepare isolated fictional demonstration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare isolated fictional demonstration": {
+      "main": [
+        [
+          {
+            "node": "Attempt one - simulated temporary failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Attempt one - simulated temporary failure": {
+      "main": [
+        [
+          {
+            "node": "Verify durable retry checkpoint",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify durable retry checkpoint": {
+      "main": [
+        [
+          {
+            "node": "Wait for retry due time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for retry due time": {
+      "main": [
+        [
+          {
+            "node": "Attempt two - recover and deliver",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Attempt two - recover and deliver": {
+      "main": [
+        [
+          {
+            "node": "Verify successful recovery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify successful recovery": {
+      "main": [
+        [
+          {
+            "node": "Repeat completed job - duplicate check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Repeat completed job - duplicate check": {
+      "main": [
+        [
+          {
+            "node": "Show final demonstration proof",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "executionTimeout": 180,
+    "callerPolicy": "none"
+  },
+  "active": false,
+  "pinData": {},
+  "tags": [],
+  "nodeGroups": [
+    {
+      "id": "ce94d738-09a7-4d8a-a678-ed907f234dd4",
+      "name": "Controlled failure and proof",
+      "nodeNames": [
+        "Prepare isolated fictional demonstration",
+        "Attempt one - simulated temporary failure",
+        "Verify durable retry checkpoint",
+        "Wait for retry due time",
+        "Attempt two - recover and deliver",
+        "Verify successful recovery",
+        "Repeat completed job - duplicate check",
+        "Show final demonstration proof"
+      ],
+      "description": "Fictional bot-errors message only. First attempt fails safely, second delivers, third proves duplicate skip."
+    }
+  ]
+}

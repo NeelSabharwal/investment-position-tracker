@@ -1,0 +1,653 @@
+{
+  "name": "Preserve paired records and organize delivery",
+  "nodes": [
+    {
+      "id": "a5b493b7-1066-4202-9c29-990816f9b54e",
+      "name": "Manual - real source probe",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "ed6e60e0-fcbb-4e86-bd2d-85e3b0ca9f75",
+      "name": "Fetch New Rules public feed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        272,
+        224
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://t.me/s/newrulesgeo",
+        "options": {
+          "timeout": 30000,
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          },
+          "response": {
+            "response": {
+              "responseFormat": "text",
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 2000,
+      "onError": "stopWorkflow"
+    },
+    {
+      "id": "ad650cbe-7565-496f-8121-7a61c860f4b6",
+      "name": "Parse real Telegram posts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        224
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const r=$input.first().json;\nconst html=String(r.body??r.data??'');\nif(Number(r.statusCode)!==200) throw new Error('TELEGRAM_HTTP_'+r.statusCode);\nconst parts=html.split('data-post=\"newrulesgeo/').slice(1);\nconst posts=[];\nconst decode=s=>s\n  .replace(/<br\\s*\\/?\\s*>/gi,'\\n')\n  .replace(/<a[^>]*>([\\s\\S]*?)<\\/a>/gi,'$1')\n  .replace(/<[^>]+>/g,'')\n  .replace(/&nbsp;/g,' ')\n  .replace(/&amp;/g,'&')\n  .replace(/&quot;/g,'\"')\n  .replace(/&#39;|&apos;/g,\"'\")\n  .replace(/&#036;/g,'$')\n  .replace(/&lt;/g,'<')\n  .replace(/&gt;/g,'>')\n  .trim();\nfor(const part of parts){\n  const id=(part.match(/^(\\d+)/)||[])[1];\n  const m=part.match(/tgme_widget_message_text[^>]*>([\\s\\S]*?)<\\/div>/i);\n  const dt=(part.match(/<time datetime=\"([^\"]+)\"/i)||[])[1]||'';\n  if(id&&m){\n    const text=decode(m[1]);\n    if(text) posts.push({\n      source_id:'new_rules',\n      telegram_post_id:id,\n      message_key:'telegram:newrulesgeo:'+id,\n      record_id:'relay:new_rules:'+id,\n      text,\n      published_at:dt,\n      source_url:'https://t.me/newrulesgeo/'+id\n    });\n  }\n}\nif(!posts.length) throw new Error('NO_STABLE_POSTS_PARSED');\nposts.sort((a,b)=>Number(a.telegram_post_id)-Number(b.telegram_post_id));\nreturn [{json:{posts:posts.slice(-20),fetched_at:new Date().toISOString()}}];"
+      }
+    },
+    {
+      "id": "ec65788e-2a38-449f-8b63-e3991ef686a0",
+      "name": "Read New Rules relay receipts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        224
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://sheets.googleapis.com/v4/spreadsheets/1re2wClNHgrLDp8uSXF4Leb_TqPLV4jTW7OGxR2sKjqM/values/'Processing%20Log'!A1%3AZ5000?valueRenderOption=UNFORMATTED_VALUE",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleSheetsOAuth2Api",
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "responseFormat": "json",
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 2000,
+      "onError": "stopWorkflow"
+    },
+    {
+      "id": "c4481f2b-be55-46c9-ab26-479443c90bad",
+      "name": "Select unseen real posts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        944,
+        224
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const crypto=require('crypto');\nconst r=$input.first().json,b=r.body??r;\nif(Number(r.statusCode)!==200||!Array.isArray(b.values)) throw Error('MACRO_LOG_READ_FAILED');\nconst h=['record_id','record_type','message_key','gmail_message_id','source_id','received_at','content_hash','origin_ref','operation_id','stage','status','analysis_checkpoint_json','progress_json','notification_json','attempt_count','next_retry_at','error_category','error_code','error_summary','review_json','execution_id','created_at','updated_at','completed_at','schema_version','dataset_id'];\nif(JSON.stringify(b.values[0]||[])!==JSON.stringify(h)) throw Error('MACRO_LOG_SCHEMA_MISMATCH');\nconst rows=b.values.slice(1).filter(x=>x.some(v=>v!==''&&v!=null)).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]??''])));\nconst posts=$('Parse real Telegram posts').first().json.posts;\nconst done=rows.filter(x=>x.record_type==='PUBLIC_NEWS_RELAY'&&x.source_id==='new_rules'&&x.status==='COMPLETE');\nconst doneKeys=new Set(done.map(x=>x.record_id));\nconst doneIds=done.map(x=>Number(String(x.record_id).split(':').pop())).filter(Number.isFinite);\nconst maxDone=doneIds.length?Math.max(...doneIds):null,firstDone=doneIds.length?Math.min(...doneIds):null;\nlet candidates=maxDone===null?[posts[posts.length-1]]:posts.filter(p=>Number(p.telegram_post_id)>firstDone&&!doneKeys.has(p.record_id));\ncandidates=candidates.slice(0,5);\nif(!candidates.length) return [{json:{route:'NO_OP',status:'NO_NEW_POSTS',highest_completed:maxDone,checked_posts:posts.length}}];\nreturn candidates.map(p=>({json:{route:'SEND',...p,content_sha256:crypto.createHash('sha256').update(p.text).digest('hex')}}));"
+      }
+    },
+    {
+      "id": "af8cb37f-e4ef-4ea0-89c8-0f25dd8bf100",
+      "name": "New post decision",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        800,
+        320
+      ],
+      "parameters": {
+        "mode": "expression",
+        "numberOutputs": 2,
+        "output": "={{ $json.route === 'NO_OP' ? 0 : 1 }}"
+      }
+    },
+    {
+      "id": "89090035-9c34-4313-89ce-1992728f6b2c",
+      "name": "Return no new posts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        224
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "return [{json:{status:'NO_OP',reason:'NO_NEW_NEW_RULES_POSTS',highest_completed:$json.highest_completed,checked_posts:$json.checked_posts,discord_messages:0}}];"
+      }
+    },
+    {
+      "id": "5d2a20d4-40c9-44c9-ad77-3598689153c8",
+      "name": "Relay posts one at a time",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1024,
+        416
+      ],
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      }
+    },
+    {
+      "id": "643f84dd-3d5a-4f66-99ac-93a6f4e0043a",
+      "name": "Build exact Discord message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1248,
+        416
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "javaScript",
+        "jsCode": "const p=$json;if(p.route!=='SEND'||p.source_id!=='new_rules'||!/^\\d+$/.test(p.telegram_post_id)||!p.text)throw Error('MACRO_RELAY_INPUT_INVALID');\nconst nonce=require('crypto').createHash('sha256').update(p.message_key).digest('hex').slice(0,24);\nif(p.text.length<=2000)return {json:{...p,delivery_kind:'text',discord_body:{content:p.text,allowed_mentions:{parse:[]},nonce,enforce_nonce:true}}};\nconst fileName='new-rules-'+p.telegram_post_id+'.txt',data=Buffer.from(p.text,'utf8');if(data.length>5000000)throw Error('MACRO_ATTACHMENT_TOO_LARGE');\nreturn {json:{...p,delivery_kind:'attachment',file_name:fileName,file_bytes:data.length,discord_body:{content:'Full New Rules post attached.\\n'+p.source_url,allowed_mentions:{parse:[]},nonce,enforce_nonce:true,attachments:[{id:0,filename:fileName,description:'Original visible Telegram post text'}]}},binary:{attachment:{data:data.toString('base64'),mimeType:'text/plain',fileName}}};"
+      }
+    },
+    {
+      "id": "71ca9b60-0828-4646-9d41-f46a6615f653",
+      "name": "Text or full-text attachment",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        1472,
+        416
+      ],
+      "parameters": {
+        "mode": "expression",
+        "numberOutputs": 2,
+        "output": "={{ $json.delivery_kind === 'attachment' ? 1 : 0 }}"
+      }
+    },
+    {
+      "id": "0ef11214-542e-43ec-8d1a-253497628abb",
+      "name": "Send to macro-news",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1696,
+        320
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://discord.com/api/v10/channels/1562615231761621064/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "discordBotApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.discord_body) }}",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "responseFormat": "json",
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "onError": "stopWorkflow",
+      "disabled": true
+    },
+    {
+      "id": "202ab40c-27c2-4a25-bc6b-a9be9e12d9fb",
+      "name": "Prepare durable relay receipt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        416
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "javaScript",
+        "jsCode": "const r=$json,b=r.body??r,p=$('Build exact Discord message').item.json;\nconst ok=Number(r.statusCode)===200&&typeof b.id==='string'&&b.channel_id==='1562615231761621064'&&b.content===p.discord_body.content&&(p.delivery_kind==='text'||(b.attachments?.length===1&&b.attachments[0].filename===p.file_name&&Number(b.attachments[0].size)===p.file_bytes));\nif(!ok) throw Error('MACRO_DISCORD_DELIVERY_FAILED:'+String(r.statusCode||'UNKNOWN')+':'+String(b.message||''));\nconst now=new Date().toISOString();\nconst checkpoint=JSON.stringify({telegram_post_id:p.telegram_post_id,text:p.text,published_at:p.published_at,source_url:p.source_url});\nconst notification=JSON.stringify({channel_id:b.channel_id,message_id:b.id,content_sha256:p.content_sha256,delivery_kind:p.delivery_kind,attachment_id:b.attachments?.[0]?.id||null});\nconst row=[p.record_id,'PUBLIC_NEWS_RELAY',p.message_key,'',p.source_id,p.published_at||now,p.content_sha256,p.source_url,'relay:'+p.telegram_post_id,'DISCORD_RELAY','COMPLETE',checkpoint,JSON.stringify({source_fetch:'COMPLETE',discord_send:'COMPLETE'}),notification,1,'','','','',JSON.stringify({manual_review_required:false}),$execution.id,now,now,now,'2.0','real'];\nreturn {json:{record_id:p.record_id,telegram_post_id:p.telegram_post_id,text:p.text,channel_id:b.channel_id,message_id:b.id,append_body:{values:[row]}}};"
+      }
+    },
+    {
+      "id": "c5cfbfa6-b451-493a-8ed9-593b5461b525",
+      "name": "Append New Rules receipt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2144,
+        416
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://sheets.googleapis.com/v4/spreadsheets/1re2wClNHgrLDp8uSXF4Leb_TqPLV4jTW7OGxR2sKjqM/values/'Processing%20Log'!A%3AZ:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleSheetsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.append_body) }}",
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "responseFormat": "json",
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "8668bf3d-926b-4f02-9f3a-3f6d68535b05",
+      "name": "Verify New Rules relay",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2368,
+        560
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "javaScript",
+        "jsCode": "const r=$json,b=r.body??r,p=$('Prepare durable relay receipt').item.json;\nif(Number(r.statusCode)!==200||Number(b.updates?.updatedRows)!==1) throw Error('MACRO_RECEIPT_APPEND_FAILED');\nreturn {json:{status:'NEW_RULES_RELAYED',record_id:p.record_id,telegram_post_id:p.telegram_post_id,channel_id:p.channel_id,message_id:p.message_id,durable_receipt:true,text_preserved:true,source_id:\"new_rules\"}};"
+      }
+    },
+    {
+      "id": "8b932b2b-51d1-42a5-878a-a8ddb0c7ee79",
+      "name": "Every 5 minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        192
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "58009ab8-d4b1-425f-bb5c-3f3214098db9",
+      "name": "Attach full New Rules post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1696,
+        512
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://discord.com/api/v10/channels/1562615231761621064/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "discordBotApi",
+        "sendBody": true,
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "responseFormat": "json",
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        },
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "payload_json",
+              "value": "={{ JSON.stringify($json.discord_body) }}"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "files[0]",
+              "inputDataFieldName": "attachment"
+            }
+          ]
+        }
+      },
+      "onError": "stopWorkflow",
+      "disabled": true
+    },
+    {
+      "id": "744e0060-1fa9-41b0-a808-82fa5a0a4dc8",
+      "name": "Finish Macro poll",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1248,
+        224
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{json:{status:'MACRO_POLL_COMPLETE',completed:$input.all().length}}];"
+      }
+    },
+    {
+      "id": "bc01f098-dc02-414a-a342-3a0bcfc6e58d",
+      "name": "Prepare durable relay job",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2100,
+        700
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "language": "javaScript",
+        "jsCode": "const p=$json;return {json:{mode:'delivery',delivery_key:p.message_key,payload:{channel_id:'1562615231761621064',content:p.discord_body.content,source_id:p.source_id,source_url:p.source_url||'',attachment_text:p.delivery_kind==='attachment'?p.text:null,file_name:p.delivery_kind==='attachment'?p.file_name:null}}};"
+      }
+    },
+    {
+      "id": "9c9d064b-e4ce-4b32-879d-7cec291488fb",
+      "name": "Deliver through durable queue",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2360,
+        700
+      ],
+      "parameters": {
+        "mode": "each",
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "yriiOojcRgN2BhCM"
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      }
+    },
+    {
+      "id": "6153b46b-c5d7-492f-b426-b9d6763c09cb",
+      "name": "Use confirmed durable receipt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2620,
+        700
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "return $input.all().map((i,index)=>i.json.status==='COMPLETE'&&i.json.discord_message?.id?{json:{statusCode:200,body:i.json.discord_message},pairedItem:{item:index}}:null).filter(Boolean);"
+      }
+    }
+  ],
+  "connections": {
+    "Manual - real source probe": {
+      "main": [
+        [
+          {
+            "node": "Fetch New Rules public feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch New Rules public feed": {
+      "main": [
+        [
+          {
+            "node": "Parse real Telegram posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse real Telegram posts": {
+      "main": [
+        [
+          {
+            "node": "Read New Rules relay receipts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read New Rules relay receipts": {
+      "main": [
+        [
+          {
+            "node": "Select unseen real posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select unseen real posts": {
+      "main": [
+        [
+          {
+            "node": "New post decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New post decision": {
+      "main": [
+        [
+          {
+            "node": "Return no new posts",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Relay posts one at a time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Relay posts one at a time": {
+      "main": [
+        [
+          {
+            "node": "Finish Macro poll",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build exact Discord message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text or full-text attachment": {
+      "main": [
+        [
+          {
+            "node": "Send to macro-news",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Attach full New Rules post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare durable relay receipt": {
+      "main": [
+        [
+          {
+            "node": "Append New Rules receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append New Rules receipt": {
+      "main": [
+        [
+          {
+            "node": "Verify New Rules relay",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify New Rules relay": {
+      "main": [
+        [
+          {
+            "node": "Relay posts one at a time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Every 5 minutes": {
+      "main": [
+        [
+          {
+            "node": "Fetch New Rules public feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build exact Discord message": {
+      "main": [
+        [
+          {
+            "node": "Prepare durable relay job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare durable relay job": {
+      "main": [
+        [
+          {
+            "node": "Deliver through durable queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deliver through durable queue": {
+      "main": [
+        [
+          {
+            "node": "Use confirmed durable receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Use confirmed durable receipt": {
+      "main": [
+        [
+          {
+            "node": "Prepare durable relay receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": "dVNGCbyQwSKhrfee",
+    "timezone": "UTC",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "executionTimeout": 120,
+    "callerPolicy": "none"
+  },
+  "active": false,
+  "pinData": {},
+  "tags": [],
+  "nodeGroups": [
+    {
+      "id": "c63d2590-4c30-4b8a-bb08-04faedfa11fd",
+      "name": "Fetch and deduplicate",
+      "nodeNames": [
+        "Fetch New Rules public feed",
+        "Parse real Telegram posts",
+        "Read New Rules relay receipts",
+        "Select unseen real posts"
+      ],
+      "description": "Read the public New Rules feed and skip posts with saved receipts."
+    },
+    {
+      "id": "0e229a06-796d-4260-8182-8da8bdb159b8",
+      "name": "Private durable Discord delivery",
+      "nodeNames": [
+        "New post decision",
+        "Return no new posts",
+        "Build exact Discord message",
+        "Prepare durable relay receipt",
+        "Append New Rules receipt",
+        "Verify New Rules relay",
+        "Relay posts one at a time",
+        "Finish Macro poll",
+        "Prepare durable relay job",
+        "Deliver through durable queue",
+        "Use confirmed durable receipt"
+      ]
+    },
+    {
+      "id": "6228d25c-076b-4910-b092-c083627331c5",
+      "name": "Retained legacy sends - disconnected",
+      "nodeNames": [
+        "Text or full-text attachment",
+        "Send to macro-news",
+        "Attach full New Rules post"
+      ]
+    }
+  ]
+}
